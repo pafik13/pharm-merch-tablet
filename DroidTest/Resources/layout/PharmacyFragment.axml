@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:background="#FFFFFF">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:gravity="right"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+        <TextView
+            android:text="Поиск: "
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/pfSearchText"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textColor="#000000" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/pfSearchEdit"
+            android:layout_weight="5"
+            android:hint="Поисковая строка"
+            android:nextFocusUp="@id/pfSearchEdit"
+            android:nextFocusLeft="@id/pfSearchEdit"
+            android:background="@drawable/bottomline" />
+        <Button
+            android:text="Поиск"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/pfSearchButton"
+            android:autoText="false"
+            android:layout_weight="1"
+            android:background="#03A9F4"
+            android:textColor="#FFFFFF"
+            android:typeface="monospace"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <Button
+        android:text="PharmacyAddButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pfPharmacyAddButton"
+        android:background="#03A9F4" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:background="#FFFFFF"
+        android:id="@+id/pfContent">
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:background="#FFFFFF">
+            <TextView
+                android:text="ДОБАВИТЬ"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pfAddPharmacy"
+                android:gravity="center"
+                android:textColor="#03A9F4"
+                android:height="68dp"
+                android:paddingRight="24dp"
+                android:paddingLeft="24dp" />
+            <ImageView
+                android:src="@drawable/ic_filter_list_black_48dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pfFilter"
+                android:layout_toLeftOf="@+id/pfMore"
+                android:layout_gravity="center_horizontal"
+                android:paddingRight="24dp"
+                android:paddingLeft="24dp"
+                android:minHeight="68dp" />
+            <ImageView
+                android:src="@drawable/ic_more_vert_black_48dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pfMore"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentRight="true"
+                android:paddingRight="24dp"
+                android:paddingLeft="24dp"
+                android:minHeight="68dp" />
+        </RelativeLayout>
+        <TableLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pfPharmacyTableHeader" />
+        <ScrollView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView1">
+            <TableLayout
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pfPharmacyTable" />
+        </ScrollView>
+    </LinearLayout>
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/textView1"
+        android:gravity="center"
+        android:text="Large Text" />
+</LinearLayout>

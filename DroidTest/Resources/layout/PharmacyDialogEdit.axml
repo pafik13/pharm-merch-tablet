@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:text="PharmacyFullName"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pdePharmacyFullNameText" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pdePharmacyFullNameEdit"
+        android:hint="PharmacyFullName"
+        android:inputType="textCapWords" />
+    <TextView
+        android:text="PharnacyAdress"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pdePharmacyAdressText" />
+    <EditText
+        android:inputType="textCapSentences"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pdePharmacyAddressEdit"
+        android:hint="PharmacyAddress" />
+    <TextView
+        android:text="PharmacySubway"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pdePharmacySubwayText" />
+    <EditText
+        android:inputType="textCapSentences"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pdePharmacySubwayEdit"
+        android:hint="PharmacySubway" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1">
+        <Button
+            android:text="SaveButton"
+            android:id="@+id/pdePharmacySaveButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="pdePharmacySaveButton"
+            android:layout_weight="1" />
+        <Button
+            android:text="CancelButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/pdePharmacyCancelButton"
+            android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>

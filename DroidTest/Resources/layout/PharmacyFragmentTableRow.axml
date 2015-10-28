@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pfPharmacyTableRow">
+    <TextView
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_column="1"
+        android:id="@+id/pfPharmacyTableRowID"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_height="match_parent" />
+    <TextView
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_column="2"
+        android:id="@+id/pfPharmacyTableRowFullName"
+        android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
+    <TextView
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_column="3"
+        android:id="@+id/pfPharmacyTableRowAddress"
+        android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:layout_gravity="center"
+        android:layout_height="match_parent" />
+</TableRow>
