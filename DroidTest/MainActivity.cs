@@ -33,9 +33,11 @@ namespace DroidTest
 		{
 			base.OnCreate (bundle);
 
+			RequestWindowFeature (WindowFeatures.ActionBar);
+
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
-
+			ActionBar.NavigationMode = ActionBarNavigationMode.Standard;
 			planetTitles = Resources.GetStringArray (Resource.Array.planets_array);
 			//MainMenu mainMenu = new MainMenu();
 			//MainMenu.GetMenu ().Values.CopyTo (planetTitles, 0);
@@ -82,7 +84,7 @@ namespace DroidTest
 			ActionBar.SetHomeButtonEnabled (true);
 
 			if (bundle == null) {
-				if (user != null) {
+				if (user == null) {
 					selectPosition (navMenu.IndexOfKey (MainMenu.INFO), null);
 				} else {
 					selectPosition (navMenu.IndexOfKey (MainMenu.MAIN), null);
@@ -164,6 +166,8 @@ namespace DroidTest
 			base.OnPostCreate (savedInstanceState);
 			drawerToggle.SyncState ();
 		}
+
+//		override OnCre
 
 		public override bool OnOptionsItemSelected(IMenuItem item)
 		{

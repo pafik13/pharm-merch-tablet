@@ -78,6 +78,12 @@
     <Compile Include="Lib\Fragments\RoutFragment.cs" />
     <Compile Include="Lib\Fragments\RoutDialog.cs" />
     <Compile Include="Lib\Fragments\RoutDialogAddNew.cs" />
+    <Compile Include="Lib\Views\VerticalTextView.cs" />
+    <Compile Include="Lib\Entities\Info.cs" />
+    <Compile Include="Lib\Entities\Attendance.cs" />
+    <Compile Include="Lib\Entities\DrugInfos.cs" />
+    <Compile Include="Lib\Fragments\DrugInfoValueDialog.cs" />
+    <Compile Include="Lib\Fragments\AttendanceDialogAddNew.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -134,6 +140,13 @@
     <AndroidResource Include="Resources\layout\RoutDialogSpinnerItem.axml" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_add_circle_outline_black_24dp.png" />
     <AndroidResource Include="Resources\layout\RoutDialogAddNew.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_add_circle_white_24dp.png" />
+    <AndroidResource Include="Resources\layout\DrugInfoValueDialog.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_camera_alt_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_camera_alt_black_48dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_add_box_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_add_box_black_48dp.png" />
+    <AndroidResource Include="Resources\menu\mfActionBar.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
@@ -149,5 +162,7 @@
     <Folder Include="Lib\Entities\Pharmacy\" />
     <Folder Include="Resources\anim\" />
     <Folder Include="Lib\Entities\Rout\" />
+    <Folder Include="Lib\Views\" />
+    <Folder Include="Resources\menu\" />
   </ItemGroup>
 </Project>

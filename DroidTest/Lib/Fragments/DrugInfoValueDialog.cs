@@ -12,19 +12,19 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 
-namespace DroidTest
+namespace DroidTest.Lib.Fragments
 {
-	public class RoutDialogAddNew : DialogFragment
+	public class DrugInfoValueDialog : DialogFragment
 	{
-		public const string DATE = @"DATE"; 
+		public const string ATTENDANCE_ID = @"ATTENDANCE_ID";
+		public const string DRUG_ID 	  = @"DRUG_ID";
+		public const string INFO_ID 	  = @"INFO_ID";
+		public const string VALUE 	  	  = @"VALUE";
 
-		private TextView tvDate = null;
-		private Button btnIncrease = null;
-		private Button btnDecrease = null;
 		private Button btnSave = null;
 		private Button btnCancel = null;
 
-		private DateTime date = DateTime.MinValue;
+		private TextView tvValue = null;
 
 		public event EventHandler AfterSave;
 
@@ -44,37 +44,19 @@ namespace DroidTest
 
 			Dialog.SetCanceledOnTouchOutside (true);
 
-			date = DateTime.Now.AddDays (DayOfWeek.Monday - DateTime.Now.DayOfWeek);
-
-			View view = inflater.Inflate (Resource.Layout.RoutDialogAddNew, container, false);
-
-			tvDate = view.FindViewById<TextView> (Resource.Id.rdanDate);
-
-			tvDate.Text = date.ToString ();
-
-			btnIncrease = view.FindViewById<Button> (Resource.Id.rdanIncrease);
-			btnIncrease.Click += (object sender, EventArgs e) => {
-				date = date.AddDays(7);
-				tvDate.Text = date.ToString();
-			};
-
-			btnDecrease = view.FindViewById<Button> (Resource.Id.rdanDecrease);
-			btnDecrease.Click += (object sender, EventArgs e) => {
-				date = date.AddDays(-7);
-				tvDate.Text = date.ToString();
-			};
-
-			btnSave = view.FindViewById<Button> (Resource.Id.rdanSave);
+			View view = inflater.Inflate (Resource.Layout.DrugInfoValueDialog, container, false);
+			btnSave = view.FindViewById<Button> (Resource.Id.divSave);
 			btnSave.Click += (object sender, EventArgs e) => {
-				Arguments.PutString(DATE, tvDate.Text);
+				Arguments.PutString(VALUE, tvValue.Text);
 				OnAfterSave(EventArgs.Empty);
 				Dismiss();
 			};
-
-			btnCancel = view.FindViewById<Button> (Resource.Id.rdanCancel);
+			btnCancel = view.FindViewById<Button> (Resource.Id.divCancel);
 			btnCancel.Click += (object sender, EventArgs e) => {
 				Dismiss();
 			};
+			tvValue  = view.FindViewById<TextView> (Resource.Id.divValue);
+			tvValue.Text = Arguments.GetString (VALUE, string.Empty);
 
 			return view;
 		}

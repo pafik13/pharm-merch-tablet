@@ -20,7 +20,7 @@ using RestSharp.Authenticators;
 
 using DroidTest.Lib;
 using DroidTest.Lib.Entities;
-using DroidTest.Lib.Entities.Drug;
+//using DroidTest.Lib.Entities.Drug;
 using DroidTest.Lib.Entities.Project;
 using DroidTest.Lib.Entities.Merchant;
 using DroidTest.Lib.Entities.Pharmacy;
@@ -159,7 +159,7 @@ namespace DroidTest.Lib.Fragments
 
 			bool isAuth = false;
 
-			if (true) {
+			if (false) {
 				isAuth = onlineAuth(user.username, user.password);           
 			} else {
 				isAuth = offlineAuth(user.username, user.password);  

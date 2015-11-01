@@ -98,37 +98,52 @@ namespace DroidTest
 			public const int edit_text_style = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int ic_add_circle_black_24dp = 2130837509;
+			public const int ic_add_box_black_48dp = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int ic_add_circle_black_48dp = 2130837510;
+			public const int ic_add_box_white_48dp = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int ic_add_circle_outline_black_24dp = 2130837511;
+			public const int ic_add_circle_black_24dp = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int ic_drawer = 2130837512;
+			public const int ic_add_circle_black_48dp = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int ic_filter_list_black_48dp = 2130837513;
+			public const int ic_add_circle_outline_black_24dp = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int ic_launcher = 2130837514;
+			public const int ic_add_circle_white_24dp = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int ic_more_vert_black_48dp = 2130837515;
+			public const int ic_camera_alt_black_48dp = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int Icon = 2130837516;
+			public const int ic_camera_alt_white_48dp = 2130837516;
 			
 			// aapt resource value: 0x7f02000d
-			public const int monoandroidsplash = 2130837517;
+			public const int ic_drawer = 2130837517;
 			
 			// aapt resource value: 0x7f02000e
-			public const int progress_info = 2130837518;
+			public const int ic_filter_list_black_48dp = 2130837518;
 			
 			// aapt resource value: 0x7f02000f
-			public const int topline = 2130837519;
+			public const int ic_launcher = 2130837519;
+			
+			// aapt resource value: 0x7f020010
+			public const int ic_more_vert_black_48dp = 2130837520;
+			
+			// aapt resource value: 0x7f020011
+			public const int Icon = 2130837521;
+			
+			// aapt resource value: 0x7f020012
+			public const int monoandroidsplash = 2130837522;
+			
+			// aapt resource value: 0x7f020013
+			public const int progress_info = 2130837523;
+			
+			// aapt resource value: 0x7f020014
+			public const int topline = 2130837524;
 			
 			static Drawable()
 			{
@@ -143,233 +158,269 @@ namespace DroidTest
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f080046
-			public const int btnDialogEmail = 2131230790;
+			// aapt resource value: 0x7f090016
+			public const int Text = 2131296278;
 			
-			// aapt resource value: 0x7f08000f
-			public const int button1 = 2131230735;
+			// aapt resource value: 0x7f090056
+			public const int add_attendance = 2131296342;
 			
-			// aapt resource value: 0x7f080049
-			public const int checkBox1 = 2131230793;
+			// aapt resource value: 0x7f090057
+			public const int add_photo = 2131296343;
 			
-			// aapt resource value: 0x7f08000b
-			public const int content_frame = 2131230731;
+			// aapt resource value: 0x7f090050
+			public const int btnDialogEmail = 2131296336;
 			
-			// aapt resource value: 0x7f08000a
-			public const int drawer_layout = 2131230730;
+			// aapt resource value: 0x7f090053
+			public const int checkBox1 = 2131296339;
 			
-			// aapt resource value: 0x7f080006
-			public const int firstTextView = 2131230726;
+			// aapt resource value: 0x7f090010
+			public const int content_frame = 2131296272;
 			
-			// aapt resource value: 0x7f08000d
-			public const int horizontalScrollView1 = 2131230733;
+			// aapt resource value: 0x7f090004
+			public const int divCancel = 2131296260;
 			
-			// aapt resource value: 0x7f080003
-			public const int icInfoTable = 2131230723;
+			// aapt resource value: 0x7f090003
+			public const int divSave = 2131296259;
 			
-			// aapt resource value: 0x7f080002
-			public const int icTitle = 2131230722;
+			// aapt resource value: 0x7f090001
+			public const int divValue = 2131296257;
 			
-			// aapt resource value: 0x7f080009
-			public const int ifAfterSignInLayout = 2131230729;
+			// aapt resource value: 0x7f090000
+			public const int divValueText = 2131296256;
 			
-			// aapt resource value: 0x7f080005
-			public const int ifBeforeSignInLayout = 2131230725;
+			// aapt resource value: 0x7f09000f
+			public const int drawer_layout = 2131296271;
 			
-			// aapt resource value: 0x7f080004
-			public const int ifGeneralLayout = 2131230724;
+			// aapt resource value: 0x7f09000b
+			public const int firstTextView = 2131296267;
 			
-			// aapt resource value: 0x7f080007
-			public const int ifSignInButton = 2131230727;
+			// aapt resource value: 0x7f090008
+			public const int icInfoTable = 2131296264;
 			
-			// aapt resource value: 0x7f080001
-			public const int imageView1 = 2131230721;
+			// aapt resource value: 0x7f090007
+			public const int icTitle = 2131296263;
 			
-			// aapt resource value: 0x7f080010
-			public const int largeText = 2131230736;
+			// aapt resource value: 0x7f09000e
+			public const int ifAfterSignInLayout = 2131296270;
 			
-			// aapt resource value: 0x7f08000c
-			public const int left_drawer = 2131230732;
+			// aapt resource value: 0x7f09000a
+			public const int ifBeforeSignInLayout = 2131296266;
 			
-			// aapt resource value: 0x7f08000e
-			public const int linearLayout1 = 2131230734;
+			// aapt resource value: 0x7f090009
+			public const int ifGeneralLayout = 2131296265;
 			
-			// aapt resource value: 0x7f080044
-			public const int llDanger = 2131230788;
+			// aapt resource value: 0x7f09000c
+			public const int ifSignInButton = 2131296268;
 			
-			// aapt resource value: 0x7f08003d
-			public const int llInfo = 2131230781;
+			// aapt resource value: 0x7f090006
+			public const int imageView1 = 2131296262;
 			
-			// aapt resource value: 0x7f080040
-			public const int llSuccess = 2131230784;
+			// aapt resource value: 0x7f090018
+			public const int largeText = 2131296280;
 			
-			// aapt resource value: 0x7f080042
-			public const int llWarning = 2131230786;
+			// aapt resource value: 0x7f090011
+			public const int left_drawer = 2131296273;
 			
-			// aapt resource value: 0x7f080011
-			public const int lvMerchantInfo = 2131230737;
+			// aapt resource value: 0x7f090002
+			public const int linearLayout1 = 2131296258;
 			
-			// aapt resource value: 0x7f080017
-			public const int pdePharmacyAddressEdit = 2131230743;
+			// aapt resource value: 0x7f09004e
+			public const int llDanger = 2131296334;
 			
-			// aapt resource value: 0x7f080016
-			public const int pdePharmacyAdressText = 2131230742;
+			// aapt resource value: 0x7f090047
+			public const int llInfo = 2131296327;
 			
-			// aapt resource value: 0x7f08001b
-			public const int pdePharmacyCancelButton = 2131230747;
+			// aapt resource value: 0x7f09004a
+			public const int llSuccess = 2131296330;
 			
-			// aapt resource value: 0x7f080015
-			public const int pdePharmacyFullNameEdit = 2131230741;
+			// aapt resource value: 0x7f09004c
+			public const int llWarning = 2131296332;
 			
-			// aapt resource value: 0x7f080014
-			public const int pdePharmacyFullNameText = 2131230740;
+			// aapt resource value: 0x7f090019
+			public const int lvMerchantInfo = 2131296281;
 			
-			// aapt resource value: 0x7f08001a
-			public const int pdePharmacySaveButton = 2131230746;
+			// aapt resource value: 0x7f090017
+			public const int mfContent = 2131296279;
 			
-			// aapt resource value: 0x7f080019
-			public const int pdePharmacySubwayEdit = 2131230745;
+			// aapt resource value: 0x7f090015
+			public const int mfFullContent = 2131296277;
 			
-			// aapt resource value: 0x7f080018
-			public const int pdePharmacySubwayText = 2131230744;
+			// aapt resource value: 0x7f090013
+			public const int mfHorizontalScrollView = 2131296275;
 			
-			// aapt resource value: 0x7f080021
-			public const int pfAddPharmacy = 2131230753;
+			// aapt resource value: 0x7f090012
+			public const int mfRelativeLayout = 2131296274;
 			
-			// aapt resource value: 0x7f080020
-			public const int pfContent = 2131230752;
+			// aapt resource value: 0x7f090014
+			public const int mfScrollView = 2131296276;
 			
-			// aapt resource value: 0x7f080022
-			public const int pfFilter = 2131230754;
+			// aapt resource value: 0x7f09001f
+			public const int pdePharmacyAddressEdit = 2131296287;
 			
-			// aapt resource value: 0x7f080023
-			public const int pfMore = 2131230755;
+			// aapt resource value: 0x7f09001e
+			public const int pdePharmacyAdressText = 2131296286;
 			
-			// aapt resource value: 0x7f08001f
-			public const int pfPharmacyAddButton = 2131230751;
+			// aapt resource value: 0x7f090023
+			public const int pdePharmacyCancelButton = 2131296291;
 			
-			// aapt resource value: 0x7f080025
-			public const int pfPharmacyTable = 2131230757;
+			// aapt resource value: 0x7f09001d
+			public const int pdePharmacyFullNameEdit = 2131296285;
 			
-			// aapt resource value: 0x7f080024
-			public const int pfPharmacyTableHeader = 2131230756;
+			// aapt resource value: 0x7f09001c
+			public const int pdePharmacyFullNameText = 2131296284;
 			
-			// aapt resource value: 0x7f080027
-			public const int pfPharmacyTableRow = 2131230759;
+			// aapt resource value: 0x7f090022
+			public const int pdePharmacySaveButton = 2131296290;
 			
-			// aapt resource value: 0x7f08002a
-			public const int pfPharmacyTableRowAddress = 2131230762;
+			// aapt resource value: 0x7f090021
+			public const int pdePharmacySubwayEdit = 2131296289;
 			
-			// aapt resource value: 0x7f080029
-			public const int pfPharmacyTableRowFullName = 2131230761;
+			// aapt resource value: 0x7f090020
+			public const int pdePharmacySubwayText = 2131296288;
 			
-			// aapt resource value: 0x7f080028
-			public const int pfPharmacyTableRowID = 2131230760;
+			// aapt resource value: 0x7f090029
+			public const int pfAddPharmacy = 2131296297;
 			
-			// aapt resource value: 0x7f08001e
-			public const int pfSearchButton = 2131230750;
+			// aapt resource value: 0x7f090028
+			public const int pfContent = 2131296296;
 			
-			// aapt resource value: 0x7f08001d
-			public const int pfSearchEdit = 2131230749;
+			// aapt resource value: 0x7f09002a
+			public const int pfFilter = 2131296298;
 			
-			// aapt resource value: 0x7f08001c
-			public const int pfSearchText = 2131230748;
+			// aapt resource value: 0x7f09002b
+			public const int pfMore = 2131296299;
 			
-			// aapt resource value: 0x7f08003e
-			public const int progressBar1 = 2131230782;
+			// aapt resource value: 0x7f090027
+			public const int pfPharmacyAddButton = 2131296295;
 			
-			// aapt resource value: 0x7f08002c
-			public const int rdDangerLayout = 2131230764;
+			// aapt resource value: 0x7f09002d
+			public const int pfPharmacyTable = 2131296301;
 			
-			// aapt resource value: 0x7f08002d
-			public const int rdDangerText = 2131230765;
+			// aapt resource value: 0x7f09002c
+			public const int pfPharmacyTableHeader = 2131296300;
 			
-			// aapt resource value: 0x7f080030
-			public const int rdPharmacyPicker = 2131230768;
+			// aapt resource value: 0x7f09002f
+			public const int pfPharmacyTableRow = 2131296303;
 			
-			// aapt resource value: 0x7f080031
-			public const int rdPick = 2131230769;
+			// aapt resource value: 0x7f090032
+			public const int pfPharmacyTableRowAddress = 2131296306;
 			
-			// aapt resource value: 0x7f08002b
-			public const int rdSearchPhrase = 2131230763;
+			// aapt resource value: 0x7f090031
+			public const int pfPharmacyTableRowFullName = 2131296305;
 			
-			// aapt resource value: 0x7f08002e
-			public const int rdSuccessLayout = 2131230766;
+			// aapt resource value: 0x7f090030
+			public const int pfPharmacyTableRowID = 2131296304;
 			
-			// aapt resource value: 0x7f08002f
-			public const int rdSuccessText = 2131230767;
+			// aapt resource value: 0x7f090026
+			public const int pfSearchButton = 2131296294;
 			
-			// aapt resource value: 0x7f080033
-			public const int rdanDate = 2131230771;
+			// aapt resource value: 0x7f090025
+			public const int pfSearchEdit = 2131296293;
 			
-			// aapt resource value: 0x7f080032
-			public const int rdanDecrease = 2131230770;
+			// aapt resource value: 0x7f090024
+			public const int pfSearchText = 2131296292;
 			
-			// aapt resource value: 0x7f080034
-			public const int rdanIncrease = 2131230772;
+			// aapt resource value: 0x7f090048
+			public const int progressBar1 = 2131296328;
 			
-			// aapt resource value: 0x7f080036
-			public const int rfAddPharmacy = 2131230774;
+			// aapt resource value: 0x7f090034
+			public const int rdDangerLayout = 2131296308;
 			
-			// aapt resource value: 0x7f08003a
-			public const int rfContent = 2131230778;
+			// aapt resource value: 0x7f090035
+			public const int rdDangerText = 2131296309;
 			
-			// aapt resource value: 0x7f080039
-			public const int rfDatePicker = 2131230777;
+			// aapt resource value: 0x7f090038
+			public const int rdPharmacyPicker = 2131296312;
 			
-			// aapt resource value: 0x7f080037
-			public const int rfFilter = 2131230775;
+			// aapt resource value: 0x7f090039
+			public const int rdPick = 2131296313;
 			
-			// aapt resource value: 0x7f080035
-			public const int rfMain = 2131230773;
+			// aapt resource value: 0x7f090033
+			public const int rdSearchPhrase = 2131296307;
 			
-			// aapt resource value: 0x7f080038
-			public const int rfMore = 2131230776;
+			// aapt resource value: 0x7f090036
+			public const int rdSuccessLayout = 2131296310;
 			
-			// aapt resource value: 0x7f080008
-			public const int scrollView1 = 2131230728;
+			// aapt resource value: 0x7f090037
+			public const int rdSuccessText = 2131296311;
 			
-			// aapt resource value: 0x7f080045
-			public const int sidProgressDanger = 2131230789;
+			// aapt resource value: 0x7f09003e
+			public const int rdanCancel = 2131296318;
 			
-			// aapt resource value: 0x7f08003f
-			public const int sidProgressInfo = 2131230783;
+			// aapt resource value: 0x7f09003b
+			public const int rdanDate = 2131296315;
 			
-			// aapt resource value: 0x7f080041
-			public const int sidProgressSuccess = 2131230785;
+			// aapt resource value: 0x7f09003a
+			public const int rdanDecrease = 2131296314;
 			
-			// aapt resource value: 0x7f080043
-			public const int sidProgressWarning = 2131230787;
+			// aapt resource value: 0x7f09003c
+			public const int rdanIncrease = 2131296316;
 			
-			// aapt resource value: 0x7f080047
-			public const int tableLayout1 = 2131230791;
+			// aapt resource value: 0x7f09003d
+			public const int rdanSave = 2131296317;
 			
-			// aapt resource value: 0x7f080048
-			public const int tableRow1 = 2131230792;
+			// aapt resource value: 0x7f090040
+			public const int rfAddPharmacy = 2131296320;
 			
-			// aapt resource value: 0x7f080000
-			public const int text = 2131230720;
+			// aapt resource value: 0x7f090044
+			public const int rfContent = 2131296324;
 			
-			// aapt resource value: 0x7f080026
-			public const int textView1 = 2131230758;
+			// aapt resource value: 0x7f090043
+			public const int rfDatePicker = 2131296323;
 			
-			// aapt resource value: 0x7f08004a
-			public const int textView14 = 2131230794;
+			// aapt resource value: 0x7f090041
+			public const int rfFilter = 2131296321;
 			
-			// aapt resource value: 0x7f08004b
-			public const int textView17 = 2131230795;
+			// aapt resource value: 0x7f09003f
+			public const int rfMain = 2131296319;
 			
-			// aapt resource value: 0x7f080012
-			public const int textView2 = 2131230738;
+			// aapt resource value: 0x7f090042
+			public const int rfMore = 2131296322;
 			
-			// aapt resource value: 0x7f080013
-			public const int textView3 = 2131230739;
+			// aapt resource value: 0x7f09000d
+			public const int scrollView1 = 2131296269;
 			
-			// aapt resource value: 0x7f08003c
-			public const int txtPassword = 2131230780;
+			// aapt resource value: 0x7f09004f
+			public const int sidProgressDanger = 2131296335;
 			
-			// aapt resource value: 0x7f08003b
-			public const int txtUsername = 2131230779;
+			// aapt resource value: 0x7f090049
+			public const int sidProgressInfo = 2131296329;
+			
+			// aapt resource value: 0x7f09004b
+			public const int sidProgressSuccess = 2131296331;
+			
+			// aapt resource value: 0x7f09004d
+			public const int sidProgressWarning = 2131296333;
+			
+			// aapt resource value: 0x7f090051
+			public const int tableLayout1 = 2131296337;
+			
+			// aapt resource value: 0x7f090052
+			public const int tableRow1 = 2131296338;
+			
+			// aapt resource value: 0x7f090005
+			public const int text = 2131296261;
+			
+			// aapt resource value: 0x7f09002e
+			public const int textView1 = 2131296302;
+			
+			// aapt resource value: 0x7f090054
+			public const int textView14 = 2131296340;
+			
+			// aapt resource value: 0x7f090055
+			public const int textView17 = 2131296341;
+			
+			// aapt resource value: 0x7f09001a
+			public const int textView2 = 2131296282;
+			
+			// aapt resource value: 0x7f09001b
+			public const int textView3 = 2131296283;
+			
+			// aapt resource value: 0x7f090046
+			public const int txtPassword = 2131296326;
+			
+			// aapt resource value: 0x7f090045
+			public const int txtUsername = 2131296325;
 			
 			static Id()
 			{
@@ -385,52 +436,55 @@ namespace DroidTest
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int FragmentLayout = 2130903040;
+			public const int DrugInfoValueDialog = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int InfoCard = 2130903041;
+			public const int FragmentLayout = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int InfoFragment = 2130903042;
+			public const int InfoCard = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int LeftDrawerItem = 2130903043;
+			public const int InfoFragment = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int Main = 2130903044;
+			public const int LeftDrawerItem = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int MainFragment = 2130903045;
+			public const int Main = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int MerchantInfo = 2130903046;
+			public const int MainFragment = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int PharmacyDialogEdit = 2130903047;
+			public const int MerchantInfo = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int PharmacyFragment = 2130903048;
+			public const int PharmacyDialogEdit = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int PharmacyFragmentTableRow = 2130903049;
+			public const int PharmacyFragment = 2130903049;
 			
 			// aapt resource value: 0x7f03000a
-			public const int RoutDialog = 2130903050;
+			public const int PharmacyFragmentTableRow = 2130903050;
 			
 			// aapt resource value: 0x7f03000b
-			public const int RoutDialogAddNew = 2130903051;
+			public const int RoutDialog = 2130903051;
 			
 			// aapt resource value: 0x7f03000c
-			public const int RoutDialogSpinnerItem = 2130903052;
+			public const int RoutDialogAddNew = 2130903052;
 			
 			// aapt resource value: 0x7f03000d
-			public const int RoutFragment = 2130903053;
+			public const int RoutDialogSpinnerItem = 2130903053;
 			
 			// aapt resource value: 0x7f03000e
-			public const int SignInDialog = 2130903054;
+			public const int RoutFragment = 2130903054;
 			
 			// aapt resource value: 0x7f03000f
-			public const int Testing = 2130903055;
+			public const int SignInDialog = 2130903055;
+			
+			// aapt resource value: 0x7f030010
+			public const int Testing = 2130903056;
 			
 			static Layout()
 			{
@@ -438,6 +492,22 @@ namespace DroidTest
 			}
 			
 			private Layout()
+			{
+			}
+		}
+		
+		public partial class Menu
+		{
+			
+			// aapt resource value: 0x7f080000
+			public const int mfActionBar = 2131230720;
+			
+			static Menu()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Menu()
 			{
 			}
 		}
@@ -476,8 +546,8 @@ namespace DroidTest
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7f070009
-			public const int Mono_Android_Theme_Splash = 2131165193;
+			// aapt resource value: 0x7f07000a
+			public const int Mono_Android_Theme_Splash = 2131165194;
 			
 			// aapt resource value: 0x7f070003
 			public const int alert_danger = 2131165187;
@@ -505,6 +575,9 @@ namespace DroidTest
 			
 			// aapt resource value: 0x7f070005
 			public const int text_row = 2131165189;
+			
+			// aapt resource value: 0x7f070009
+			public const int text_success = 2131165193;
 			
 			static Style()
 			{

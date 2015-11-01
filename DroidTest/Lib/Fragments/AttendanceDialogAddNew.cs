@@ -12,9 +12,9 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 
-namespace DroidTest
+namespace DroidTest.Lib.Fragments
 {
-	public class RoutDialogAddNew : DialogFragment
+	public class AttendanceDialogAddNew : DialogFragment
 	{
 		public const string DATE = @"DATE"; 
 
@@ -44,7 +44,7 @@ namespace DroidTest
 
 			Dialog.SetCanceledOnTouchOutside (true);
 
-			date = DateTime.Now.AddDays (DayOfWeek.Monday - DateTime.Now.DayOfWeek);
+			date = DateTime.Now.Date;
 
 			View view = inflater.Inflate (Resource.Layout.RoutDialogAddNew, container, false);
 
@@ -54,13 +54,13 @@ namespace DroidTest
 
 			btnIncrease = view.FindViewById<Button> (Resource.Id.rdanIncrease);
 			btnIncrease.Click += (object sender, EventArgs e) => {
-				date = date.AddDays(7);
+				date = date.AddDays(1);
 				tvDate.Text = date.ToString();
 			};
 
 			btnDecrease = view.FindViewById<Button> (Resource.Id.rdanDecrease);
 			btnDecrease.Click += (object sender, EventArgs e) => {
-				date = date.AddDays(-7);
+				date = date.AddDays(-1);
 				tvDate.Text = date.ToString();
 			};
 
@@ -76,7 +76,7 @@ namespace DroidTest
 				Dismiss();
 			};
 
-			return view;
+			return view;		
 		}
 
 		protected virtual void OnAfterSave(EventArgs e)

@@ -11,7 +11,7 @@ using DroidTest.Lib.Entities;
 using DroidTest.Lib.Entities.Merchant;
 using DroidTest.Lib.Entities.Manager;
 using DroidTest.Lib.Entities.Project;
-using DroidTest.Lib.Entities.Drug;
+//using DroidTest.Lib.Entities.Drug;
 using DroidTest.Lib.Entities.Territory;
 using DroidTest.Lib.Entities.Pharmacy;
 
@@ -22,6 +22,47 @@ namespace DroidTest.Lib
 
         static Common()
 		{
+		}
+
+		public static bool CreateDirForPhotos(User user)
+		{
+			string storeLocation = Path.Combine(GetDirForPhotos(user),  @"photos.xml");
+			new FileInfo(storeLocation).Directory.Create();
+			return true;
+		}
+
+		public static string GetDirForPhotos(User user)
+		{
+			return Path.Combine(DatabaseFileDir, user.username, @"Photos");
+		}
+
+		/******  DRUG INFOS *****/
+		public static List<DrugInfo> GetDrugInfos()
+		{
+			string storeLocation = Path.Combine(DatabaseFileDir,  @"drugInfos.xml");
+			if (!File.Exists(storeLocation)) {
+				return null;
+			}
+
+			var serializer = new XmlSerializer(typeof(List<DrugInfo> ));
+
+			using (var stream = new FileStream(storeLocation, FileMode.Open))
+			{
+				return (List<DrugInfo> )serializer.Deserialize(stream);
+			}
+		}
+
+		public static bool SetDrugInfos(List<DrugInfo>  drugInfos)
+		{
+			string storeLocation = Path.Combine(DatabaseFileDir, @"drugInfos.xml");
+			new FileInfo(storeLocation).Directory.Create();
+			var serializer = new XmlSerializer(typeof(List<DrugInfo>));
+			using (var writer = new StreamWriter(storeLocation))
+			{
+				serializer.Serialize(writer, drugInfos);
+			}
+
+			return true;
 		}
 
 		/******  CURRENT USER *****/

@@ -3,77 +3,121 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <HorizontalScrollView
+    <RelativeLayout
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="61.3dp"
-        android:id="@+id/horizontalScrollView1"
-        android:layout_marginBottom="9.7dp">
-        <LinearLayout
-            android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:id="@+id/mfRelativeLayout">
+        <HorizontalScrollView
             android:minWidth="25px"
             android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/linearLayout1">
-            <Button
-                android:text="Button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/button1" />
-            <Button
-                android:text="Button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/button1" />
-            <Button
-                android:text="Button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/button1" />
-            <Button
-                android:text="Button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/button1" />
-            <Button
-                android:text="Button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/button1" />
-            <Button
-                android:text="Button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/button1" />
-            <Button
-                android:text="Button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/button1" />
-            <Button
-                android:text="Button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/button1" />
-            <Button
-                android:text="Button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/button1" />
-            <Button
-                android:text="Button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/button1" />
-        </LinearLayout>
-    </HorizontalScrollView>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mfHorizontalScrollView"
+            android:layout_centerInParent="true">
+            <ScrollView
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mfScrollView">
+                <TableLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mfFullContent">
+                    <TableRow>
+                        <TextView
+                            android:rotation="-90"
+                            android:text="Кол-во"
+                            android:layout_gravity="center"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/Text" />
+                        <TableLayout
+                            android:minWidth="25px"
+                            android:minHeight="25px"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/mfContent">
+                            <TableRow>
+                                <TextView
+                                    android:layout_column="1"
+                                    android:text="Open..."
+                                    android:padding="3dip" />
+                                <TextView
+                                    android:layout_span="1"
+                                    android:text="Ctrl-O"
+                                    android:gravity="right"
+                                    android:padding="3dip"
+                                    android:layout_width="55.4dp" />
+                            </TableRow>
+                            <TableRow>
+                                <TextView
+                                    android:layout_column="1"
+                                    android:text="Save..."
+                                    android:padding="3dip" />
+                                <TextView
+                                    android:text="Ctrl-S"
+                                    android:gravity="right"
+                                    android:padding="3dip" />
+                            </TableRow>
+                            <TableRow>
+                                <TextView
+                                    android:layout_column="1"
+                                    android:text="Save As..."
+                                    android:padding="3dip" />
+                                <TextView
+                                    android:text="Ctrl-Shift-S"
+                                    android:gravity="right"
+                                    android:padding="3dip" />
+                            </TableRow>
+                            <View
+                                android:layout_height="2dip"
+                                android:background="#FF909090" />
+                            <TableRow>
+                                <TextView
+                                    android:text="X"
+                                    android:padding="3dip" />
+                                <TextView
+                                    android:text="Import..."
+                                    android:padding="3dip" />
+                            </TableRow>
+                            <TableRow>
+                                <TextView
+                                    android:text="X"
+                                    android:padding="3dip" />
+                                <TextView
+                                    android:text="Export..."
+                                    android:padding="3dip" />
+                                <TextView
+                                    android:text="Ctrl-E"
+                                    android:gravity="right"
+                                    android:padding="3dip" />
+                            </TableRow>
+                            <View
+                                android:layout_height="2dip"
+                                android:background="#FF909090" />
+                            <TableRow>
+                                <TextView
+                                    android:layout_column="1"
+                                    android:text="Quit"
+                                    android:padding="3dip" />
+                            </TableRow>
+                        </TableLayout>
+                    </TableRow>
+                </TableLayout>
+            </ScrollView>
+        </HorizontalScrollView>
+    </RelativeLayout>
     <TextView
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/largeText"
         android:gravity="center" />
 </LinearLayout>

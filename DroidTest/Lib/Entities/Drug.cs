@@ -1,9 +1,8 @@
 ﻿using System;
-using DroidTest.Lib.Entities;
 
 using RestSharp;
 
-namespace DroidTest.Lib.Entities.Drug
+namespace DroidTest.Lib.Entities
 {
     [Serializable]
     public class Drug : IEntity

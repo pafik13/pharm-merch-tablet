@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/add_attendance"
+          android:icon="@drawable/ic_add_box_white_48dp"
+          android:title="Посещение"/>
+    <item android:id="@+id/add_photo"
+          android:icon="@drawable/ic_camera_alt_white_48dp"
+          android:title="Фото" />
+</menu>
