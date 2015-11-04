@@ -74,16 +74,28 @@
     <Compile Include="Lib\Entities\Territory.cs" />
     <Compile Include="Lib\Entities\Tradenet.cs" />
     <Compile Include="Lib\Fragments\SignInDialog.cs" />
-    <Compile Include="Lib\Entities\Rout.cs" />
     <Compile Include="Lib\Fragments\RoutFragment.cs" />
     <Compile Include="Lib\Fragments\RoutDialog.cs" />
     <Compile Include="Lib\Fragments\RoutDialogAddNew.cs" />
     <Compile Include="Lib\Views\VerticalTextView.cs" />
     <Compile Include="Lib\Entities\Info.cs" />
-    <Compile Include="Lib\Entities\Attendance.cs" />
     <Compile Include="Lib\Entities\DrugInfos.cs" />
     <Compile Include="Lib\Fragments\DrugInfoValueDialog.cs" />
     <Compile Include="Lib\Fragments\AttendanceDialogAddNew.cs" />
+    <Compile Include="Lib\Entities\Attendance\Attendance.cs" />
+    <Compile Include="Lib\Entities\Attendance\AttendanceRepository.cs" />
+    <Compile Include="Lib\Entities\Attendance\AttendanceManager.cs" />
+    <Compile Include="Lib\Entities\AttendanceResult\AttendanceResultRepository.cs" />
+    <Compile Include="Lib\Entities\AttendanceResult\AttendanceResultManager.cs" />
+    <Compile Include="Lib\Entities\AttendanceResult\AttendanceResult.cs" />
+    <Compile Include="Lib\Entities\Rout\Rout.cs" />
+    <Compile Include="Lib\Entities\SyncQueue\SyncQueue.cs" />
+    <Compile Include="Lib\Entities\SyncQueue\SyncQueueRepository.cs" />
+    <Compile Include="Lib\Entities\SyncQueue\SyncQueueManager.cs" />
+    <Compile Include="Lib\Fragments\SyncFragment.cs" />
+    <Compile Include="Lib\Entities\AttendancePhoto\AttendancePhotoRepository.cs" />
+    <Compile Include="Lib\Entities\AttendancePhoto\AttendancePhotoManager.cs" />
+    <Compile Include="Lib\Entities\AttendancePhoto\AttendancePhoto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -147,6 +159,14 @@
     <AndroidResource Include="Resources\drawable-hdpi\ic_add_box_white_48dp.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_add_box_black_48dp.png" />
     <AndroidResource Include="Resources\menu\mfActionBar.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_remove_circle_outline_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_add_circle_outline_white_48dp.png" />
+    <AndroidResource Include="Resources\layout\SyncFragment.axml" />
+    <AndroidResource Include="Resources\layout\SyncFragmentItem.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_highlight_off_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_check_circle_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_cached_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_cached_black_48dp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
@@ -164,5 +184,9 @@
     <Folder Include="Lib\Entities\Rout\" />
     <Folder Include="Lib\Views\" />
     <Folder Include="Resources\menu\" />
+    <Folder Include="Lib\Entities\AttendanceResult\" />
+    <Folder Include="Lib\Entities\Attendance\" />
+    <Folder Include="Lib\Entities\SyncQueue\" />
+    <Folder Include="Lib\Entities\AttendancePhoto\" />
   </ItemGroup>
 </Project>

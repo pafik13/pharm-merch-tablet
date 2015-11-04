@@ -22,7 +22,6 @@ using DroidTest.Lib;
 using DroidTest.Lib.Entities;
 //using DroidTest.Lib.Entities.Drug;
 using DroidTest.Lib.Entities.Project;
-using DroidTest.Lib.Entities.Merchant;
 using DroidTest.Lib.Entities.Pharmacy;
 using DroidTest.Lib.Entities.Manager;
 using DroidTest.Lib.Entities.Territory;
@@ -159,7 +158,7 @@ namespace DroidTest.Lib.Fragments
 
 			bool isAuth = false;
 
-			if (false) {
+			if (true) {
 				isAuth = onlineAuth(user.username, user.password);           
 			} else {
 				isAuth = offlineAuth(user.username, user.password);  
@@ -284,7 +283,7 @@ namespace DroidTest.Lib.Fragments
 			var login = new RestClient(@"http://sbl-logisapp.rhcloud.com/");
 
 			//login.Authenticator = new SimpleAuthenticator("identifier", "lyubin.p@gmail.com", "password", "q1234567");
-			login.Authenticator = new SimpleAuthenticator("identifier", ":" + username, "password", "624590701");
+			login.Authenticator = new SimpleAuthenticator("identifier", username, "password", password);
 			login.CookieContainer = new CookieContainer();
 
 			var request = new RestRequest(@"auth/local", Method.POST);
@@ -358,6 +357,19 @@ namespace DroidTest.Lib.Fragments
 			{
 				//Debug.WriteLine(@"Не удалось сохранить информации о препаратах", @"Error");
 				WriteWarning (@"Не удалось сохранить информации о препаратах", 2000);
+				return false;
+			}
+
+			WriteInfo (@"Получение информации о собираемых данных", 2000);
+			request = new RestRequest(@"project/{id}/infos", Method.GET);
+			request.AddCookie(cookieName, cookieValue);
+			request.AddUrlSegment(@"id", merchant.project.ToString());
+			List<Info> infos = client.Execute<List<Info>>(request).Data;
+
+			if (!Common.SetInfos(username, infos))
+			{
+				//Debug.WriteLine(@"Не удалось сохранить информации о препаратах", @"Error");
+				WriteWarning (@"Не удалось сохранить информацию о собираемых данных", 2000);
 				return false;
 			}
 

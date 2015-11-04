@@ -8,7 +8,6 @@ using System.Xml.Serialization;
 using Android.OS;
 
 using DroidTest.Lib.Entities;
-using DroidTest.Lib.Entities.Merchant;
 using DroidTest.Lib.Entities.Manager;
 using DroidTest.Lib.Entities.Project;
 //using DroidTest.Lib.Entities.Drug;
@@ -215,6 +214,33 @@ namespace DroidTest.Lib
 
             return true;
         }
+
+		public static List<Info> GetInfos(string username)
+		{
+			string storeLocation = Path.Combine(DatabaseFileDir, username, @"infos.xml");
+			var serializer = new XmlSerializer(typeof(List<Info>));
+
+			if (File.Exists (storeLocation)) {
+				using (var stream = new FileStream (storeLocation, FileMode.Open)) {
+					return (List<Info>)serializer.Deserialize (stream);
+				}
+			}
+
+			return new List<Info> ();
+		}
+
+		public static bool SetInfos(string username, List<Info> infos)
+		{
+			string storeLocation = Path.Combine(DatabaseFileDir, username, @"infos.xml");
+			new FileInfo(storeLocation).Directory.Create();
+			var serializer = new XmlSerializer(typeof(List<Info>));
+			using (var writer = new StreamWriter(storeLocation))
+			{
+				serializer.Serialize(writer, infos);
+			}
+
+			return true;
+		}
 
         public static Territory GetTerritory(string username)
         {

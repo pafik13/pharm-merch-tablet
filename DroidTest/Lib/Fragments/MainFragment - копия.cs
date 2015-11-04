@@ -24,27 +24,27 @@ namespace DroidTest.Lib.Fragments
 {
 	public class MainFragment : Fragment
 	{
-		const int MENU_PHOTO = 2;
-
-		private bool bIsPhotoMake = false;
-
-		private User user = null;
-		private Merchant merchant = null;
 		private Rout currentRout = null;
 		private List<Pharmacy> currentPharmacies = null;
-		private int selectedPharmacy = 0;
 		private List<Info> infos = null;
 		private List<Drug> drugs = null;
 		private List<Attendance> currentAttendances = null;
 		private Attendance newAttendance = null;
 		private List<AttendanceResult> newAttendanceResults = null;
-		private List<AttendancePhoto> newAttendancePhotos = null;
+
+		private List<InfoItem> infosList = null;
+
+
+		private List<DrugInfo> drugInfos = null;
+		private DrugInfo drugInfo = null;
 
 		private TableLayout table = null;
 		private TextView text = null;
-		private Spinner spnSelectedPharmacy = null;
 
+		private User user = null;
 		private static Java.IO.File file = null;
+
+		private int AttID = 0;
 
 		private IMenuItem miAddAtt = null;
 		private IMenuItem miAddPhoto = null;
@@ -57,53 +57,117 @@ namespace DroidTest.Lib.Fragments
 			SetHasOptionsMenu(true);
 		}
 
+		DrugInfo GetDrugInfo(int pharmacyID)
+		{
+			drugInfos = Common.GetDrugInfos();
+
+			foreach (var item in drugInfos) {
+				if (item.pharmacy == pharmacyID) {
+					return item;
+				}
+			}
+
+			return null;
+		}
+
+		string GetDrugInfoValue(List<AttendanceResult> results, int infoID, int drugID)
+		{
+			var searchResult = from result in results
+							  where (result.info == infoID) && (result.drug == drugID)
+							 select result;
+
+			if (searchResult.Count() > 1)
+			{
+				return string.Empty;
+			}
+
+			foreach (var item in searchResult) {
+				return item.value;
+			}
+
+			return string.Empty;
+		}
+
+		void SetDrugInfoValue(DrugInfo drugInfo, DateTime date, int infoID, int drugID, string value)
+		{
+//			foreach (var attendace in drugInfo.attendaces) {
+//				if (attendace.date == date) {
+				foreach (var result in newAttendanceResults) {
+						if (result.info == infoID && result.drug == drugID) {
+							result.value = value;
+							return;
+						}
+					}
+//				}
+//			}
+		}
+
+		void SetDrugInfoValue(DrugInfo drugInfo, int attendanceID, int infoID, int drugID, string value)
+		{
+//			foreach (var attendace in drugInfo.attendaces) {
+//				if (attendace.id == attendanceID) {
+			foreach (var result in newAttendanceResults) {
+				if (result.info == infoID && result.drug == drugID) {
+					result.value = value;
+					return;
+				}
+			}
+//				}
+//			}
+		}
+
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
 
 			// Use this to return your custom view for this Fragment
 			// return inflater.Inflate(Resource.Layout.YourFragment, container, false);
-
-			View rootView = inflater.Inflate(Resource.Layout.MainFragment, container, false);
-
-			text = rootView.FindViewById<TextView> (Resource.Id.largeText);
-
 			user = Common.GetCurrentUser ();
 
-			if (user == null) {
-				text.Text = @"НЕТ ПРЕПАРАТОВ ИЛИ СОБИРАЕМОЙ ИНФОРМАЦИИ";
-				text.SetTextAppearance (Activity, Resource.Style.text_danger);
+//			currentRout = GetRout ();
+			int[] ids = {1,2,3,4,5};
+			currentPharmacies = (List<Pharmacy>)PharmacyManager.GetPharmacies (ids);
 
-				miAddAtt.SetEnabled (false);
-				return rootView;
-			}
 
-			merchant = Common.GetMerchant (user.username);
-
-			currentPharmacies = (List<Pharmacy>)PharmacyManager.GetPharmacies (string.Empty, 20);
-
-			infos = Common.GetInfos (user.username);
+			infos = new List<Info>();
+			infos.Add (new Info {id = 2, name = @"Кол-во" });
+			infos.Add (new Info {id = 4, name = @"Розница" });
+			infos.Add (new Info {id = 6, name = @"Заказано" });
 
 			drugs = Common.GetDrugs (user.username);
 
+			var res = new AttendanceResult () { id = 1, attendance = 1, drug = 1, info = 1, value = @"N" };
+
+			AttendanceResultManager.SaveAttendanceResult (res);
+
+			var att = new Attendance (1, new DateTime (2015, 10, 28), infos, drugs, @"N");
+			AttendanceManager.SaveAttendance (att);
+
+			currentAttendances = (List<Attendance>)AttendanceManager.GetAttendances (currentPharmacies [0].id);
+
+
+			List<DrugInfo> dInfos = new List<DrugInfo>();
+			drugInfo = new DrugInfo(1);
+
+			drugInfo.attendaces.Add (new Attendance (1, new DateTime (2015, 10, 29), infos, drugs) { id = ++AttID });
+			drugInfo.attendaces.Add (new Attendance (1, new DateTime (2015, 10, 30), infos, drugs) { id = ++AttID });
+			drugInfo.attendaces.Add (new Attendance (1, new DateTime (2015, 10, 31), infos, drugs) { id = ++AttID });
+
+			SetDrugInfoValue (drugInfo, new DateTime (2015, 10, 29), 2, 1, 1.ToString ());
+
+			View rootView = inflater.Inflate(Resource.Layout.MainFragment, container, false);
+
+			string[] planets_array = Resources.GetStringArray (Resource.Array.planets_array);
+
+			Pharmacy pharmacy = new Pharmacy { id = 1, fullName = @"ООО Аптека №1", shortName = @"Аптека  №1", address = @"Перекопская, 34" };
+			string json = JsonConvert.SerializeObject (pharmacy);
+			Log.Info (@"JSON_Pharm", json);
+			text = rootView.FindViewById<TextView> (Resource.Id.largeText);
+			//text.Text = @"Привет!!!";
+			text.Text = json;
+
 			table = rootView.FindViewById<TableLayout> (Resource.Id.mfFullContent);
 
-			spnSelectedPharmacy = rootView.FindViewById<Spinner> (Resource.Id.mfSelectedPharmacySpinner);
-
-			ArrayAdapter adapter = new ArrayAdapter (Activity, Android.Resource.Layout.SimpleSpinnerItem, PharmacyManager.ToArray (currentPharmacies));
-
-			spnSelectedPharmacy.Adapter = adapter;
-
-			spnSelectedPharmacy.ItemSelected += (object sender, AdapterView.ItemSelectedEventArgs e) => {
-				selectedPharmacy = currentPharmacies [e.Position].id;
-
-				currentAttendances = (List<Attendance>)AttendanceManager.GetAttendances (selectedPharmacy);
-
-				RefreshTable();
-			};
-
-			spnSelectedPharmacy.SetSelection (0);
-
-//			RefreshTable ();
+			RefreshTable ();
 
 			return rootView;
 			//return base.OnCreateView (inflater, container, savedInstanceState);
@@ -111,10 +175,11 @@ namespace DroidTest.Lib.Fragments
 
 		void RefreshTable()
 		{
+			
 			table.RemoveAllViews ();
 
 			TableRow header = new TableRow (Activity);
-			header.SetMinimumHeight (88);
+			header.SetMinimumHeight (70);
 			TableRow.LayoutParams hParamsDrug = new TableRow.LayoutParams ();
 			hParamsDrug.Height = TableLayout.LayoutParams.WrapContent;
 			hParamsDrug.Width = TableLayout.LayoutParams.WrapContent;
@@ -134,11 +199,11 @@ namespace DroidTest.Lib.Fragments
 			TableLayout tlHeader = new TableLayout (Activity);
 			TableRow rAttendance = new TableRow (Activity);
 
-			foreach (var attendace in currentAttendances) {
+			foreach (var attendace in drugInfo.attendaces) {
 				TextView hAttendace = new TextView (Activity);
 				hAttendace.Text = attendace.date.ToString(@"dd-MMM ddd");
 				hAttendace.LayoutParameters = p;
-				hAttendace.Rotation = -70;
+				hAttendace.Rotation = -60;
 				header.AddView (hAttendace);
 //				rAttendance.AddView(hAttendace);
 			}
@@ -184,40 +249,66 @@ namespace DroidTest.Lib.Fragments
 					vv.LayoutParameters = p;
 					rr.AddView (vv);
 
-					foreach (var attendace in currentAttendances) {
+					foreach (var attendace in drugInfo.attendaces) {
 						RelativeLayout rl = new RelativeLayout(Activity);
 						rl.SetGravity (GravityFlags.Center);
 						rl.SetMinimumHeight (68);
 						rl.SetMinimumWidth (68);
 						rl.LayoutParameters = p;
 						rl.Id = attendace.id;
+						rl.Click += (object sender, EventArgs e) => {
+							RelativeLayout rlAttendace = (RelativeLayout) sender;
+							TableRow trDrug = (TableRow) rl.Parent;
+							TableLayout trInfo = (TableLayout) rl.Parent.Parent;
 
-						string value = string.Empty;
-						if (attendace.id != -1) {
-							value = AttendanceResultManager.GetAttendanceResultValue (attendace.id, info.id, drug.id);
-						} else {
-							value = AttendanceResultManager.GetResultValue (newAttendanceResults, info.id, drug.id);
-							rl.Click += Rl_Click;
-						}
+							string message = string.Format(@"Click to RL.id:{0}, P,id:{1}, PP.id:{2}", rlAttendace.Id, trDrug.Id, trInfo.Id);
 
-						TextView vvv = new TextView (Activity);
-						vvv.Gravity = GravityFlags.Center;
-						if (string.IsNullOrEmpty (value) || value.Equals(@"N")) {
-							vvv.SetTextAppearance (Activity, Resource.Style.text_danger);
-//							rl.SetBa
+							Toast.MakeText(Activity,  message, ToastLength.Short).Show();
+
+							FragmentTransaction trans = FragmentManager.BeginTransaction ();
+							DrugInfoValueDialog drugInfoValueDialog = new DrugInfoValueDialog ();
+							Bundle args = new Bundle();
+							args.PutInt(DrugInfoValueDialog.ATTENDANCE_ID, rlAttendace.Id);
+							args.PutInt(DrugInfoValueDialog.DRUG_ID, trDrug.Id);
+							args.PutInt(DrugInfoValueDialog.INFO_ID, trInfo.Id);
+//							args.PutString(DrugInfoValueDialog.VALUE, GetDrugInfoValue(drugInfo.attendaces[rlAttendace.Id - 1].results, trInfo.Id, trDrug.Id));
+
+							drugInfoValueDialog.Arguments = args;
+							drugInfoValueDialog.AfterSave += DrugInfoValueDialog_AfterSave;
+
+							drugInfoValueDialog.Show (trans, "dialog fragment");
+
+							Log.Info ("ifSignInButton", "Click");
+						};
+
+//						string value = GetDrugInfoValue (attendace.results, info.id, drug.id);
+
+						if (string.IsNullOrEmpty (value)) {
+							ImageView iv = new ImageView (Activity);
+							iv.SetImageResource (Resource.Drawable.ic_add_circle_white_24dp);
 							rl.SetBackgroundColor (Android.Graphics.Color.LightPink);
 //							rl.SetBackgroundResource(Resource.Style.alert_success);
+							rl.AddView (iv);						
 						} else {
+							TextView vvv = new TextView (Activity);
+							vvv.Gravity = GravityFlags.Center;
+							vvv.Text = value;
 							vvv.SetTextAppearance (Activity, Resource.Style.text_success);
 //							vvv.SetTextSize (ComplexUnitType.Sp, 24);
 //							vvv.SetTextColor(Android.Graphics.Color.Argb);
 
 							rl.SetBackgroundColor (Android.Graphics.Color.LightGreen);
+							rl.AddView (vvv);							
 						}
-						vvv.Text = AttendanceResult.StringBoolToRussian(value);
-						rl.AddView (vvv);							
+
 						rr.AddView (rl);
 					}
+
+					//					for (int i = 0; i < 2; i++) { // Values
+					//						ImageView iv = new ImageView (Activity);
+					//						iv.SetImageResource (Resource.Drawable.ic_add_circle_white_24dp);
+					//						rr.AddView (iv);
+					//					}
 
 					tl.AddView (rr);
 				}
@@ -225,25 +316,6 @@ namespace DroidTest.Lib.Fragments
 				r.AddView (tl);
 				table.AddView (r);
 			}
-		}
-
-		void Rl_Click (object sender, EventArgs e)
-		{
-			RelativeLayout rlAttendace = (RelativeLayout) sender;
-			TableRow trDrug = (TableRow) rlAttendace.Parent;
-			TableLayout trInfo = (TableLayout) rlAttendace.Parent.Parent;
-
-			string message = string.Format(@"Click to RL.id:{0}, P,id:{1}, PP.id:{2}", rlAttendace.Id, trDrug.Id, trInfo.Id);
-
-			Toast.MakeText(Activity,  message, ToastLength.Short).Show();
-
-			string value = AttendanceResultManager.GetResultValue(newAttendanceResults, trInfo.Id, trDrug.Id);
-
-			value = AttendanceResult.InvertStringBool(value);
-
-			AttendanceResultManager.SetResultValue(newAttendanceResults, trInfo.Id, trDrug.Id, value);
-
-			RefreshTable();
 		}
 
 		void DrugInfoValueDialog_AfterSave(object sender, EventArgs e)
@@ -254,7 +326,7 @@ namespace DroidTest.Lib.Fragments
 			int infoId = dialog.Arguments.GetInt(DrugInfoValueDialog.INFO_ID);
 			string value = dialog.Arguments.GetString (DrugInfoValueDialog.VALUE);
 
-//			SetDrugInfoValue (drugInfo, attendaceId, infoId, drugId, value);
+			SetDrugInfoValue (drugInfo, attendaceId, infoId, drugId, value);
 
 			RefreshTable ();
 		}
@@ -266,7 +338,7 @@ namespace DroidTest.Lib.Fragments
 
 			DateTime date = DateTime.Parse (sDate);
 
-//			drugInfo.attendaces.Add (new Attendance (1, date, infos, drugs) { id = ++AttID });
+			drugInfo.attendaces.Add (new Attendance (1, date, infos, drugs) { id = ++AttID });
 			RefreshTable ();
 		}
 		Info GetInfo(int id)
@@ -301,7 +373,7 @@ namespace DroidTest.Lib.Fragments
 
 //			miAddAtt.Id
 
-			miAddPhoto = menu.Add(1, MENU_PHOTO, 2, @"Добавить фото");
+			miAddPhoto = menu.Add(1, 2, 2, @"Добавить фото");
 			miAddPhoto.SetIcon (Resource.Drawable.ic_camera_alt_white_48dp);
 			miAddPhoto.SetEnabled (false);
 
@@ -315,26 +387,13 @@ namespace DroidTest.Lib.Fragments
 				Toast.MakeText (Activity, @"add_attendance click", ToastLength.Short).Show ();
 
 				if (miAddPhoto.IsEnabled) {
-					int attID = AttendanceManager.SaveAttendance (newAttendance);
-					AttendanceResultManager.SaveNewAttendanceResults (attID, newAttendanceResults);
-					AttendancePhotoManager.SaveNewAttendancePhotos (attID, newAttendancePhotos);
-					newAttendance = null;
-					newAttendanceResults = null;
-					newAttendancePhotos = null;
-					currentAttendances = (List<Attendance>)AttendanceManager.GetAttendances (selectedPharmacy);
-					RefreshTable ();
 					miAddPhoto.SetEnabled (false);
 					miAddAtt.SetIcon (Resource.Drawable.ic_add_circle_outline_white_48dp);
 					miAddAtt.SetTitle (@"Начать посещение");
 				} else {
-					newAttendance = new Attendance () { id = -1, date = DateTime.Now.Date, pharmacy = selectedPharmacy, merchant = merchant.id};
-					newAttendanceResults = AttendanceResultManager.GenerateResults (infos, drugs, @"N");
-					newAttendancePhotos = new List<AttendancePhoto> ();
-					currentAttendances.Add (newAttendance);
 					miAddPhoto.SetEnabled (true);
 					miAddAtt.SetIcon (Resource.Drawable.ic_remove_circle_outline_white_48dp);
 					miAddAtt.SetTitle (@"Закончить посещение");
-					RefreshTable ();
 				}
 
 				return true;
@@ -357,14 +416,12 @@ namespace DroidTest.Lib.Fragments
 				Log.Info ("ifSignInButton", "Click");
 				break;
 			case Resource.Id.add_photo:
-			case MENU_PHOTO:
 				Toast.MakeText (Activity, @"add_photo click", ToastLength.Short).Show ();
 
 				if (Common.CreateDirForPhotos (user)) {
 					Intent intent = new Intent (MediaStore.ActionImageCapture);
 					file = new Java.IO.File (Common.GetDirForPhotos(user), String.Format("myPhoto_{0}.jpg", Guid.NewGuid()));
 					intent.PutExtra (MediaStore.ExtraOutput, Android.Net.Uri.FromFile (file));
-					bIsPhotoMake = true;
 					StartActivityForResult (intent, 0);
 				}
 
@@ -376,53 +433,11 @@ namespace DroidTest.Lib.Fragments
 			return base.OnOptionsItemSelected (item);
 		}
 
-		public override void OnPause ()
-		{
-			base.OnPause ();
-
-			if (!bIsPhotoMake) {
-				if (newAttendance != null) {
-					int attID = AttendanceManager.SaveAttendance (newAttendance);
-					AttendanceResultManager.SaveNewAttendanceResults (attID, newAttendanceResults);
-
-					newAttendance = null;
-					newAttendanceResults = null;
-				}
-			}
-		}
-
-		private float convertToDegree(String stringDMS){
-			float result = 0.0f;
-			char[] spl1 = new char[1] { ',' };
-			string[] DMS = stringDMS.Split(spl1, 3);
-
-			char[] spl2 = new char[1] { '/' };
-			string[] stringD = DMS[0].Split(spl2, 2);
-			double D0 = double.Parse((stringD[0]));
-			double D1 = double.Parse(stringD[1]);
-			double FloatD = D0/D1;
-
-			string[] stringM = DMS[1].Split(spl2, 2);
-			double M0 = double.Parse(stringM[0]);
-			double M1 = double.Parse(stringM[1]);
-			double FloatM = M0/M1;
-
-			string[] stringS = DMS[2].Split(spl2, 2);
-			double S0 = double.Parse(stringS[0]);
-			double S1 = double.Parse(stringS[1]);
-			double FloatS = S0/S1;
-
-			result = (float)(FloatD + (FloatM/60) + (FloatS/3600));
-
-			return result;
-		}
-
 		public override void OnActivityResult (int requestCode, Result resultCode, Intent data)
 		{
 			base.OnActivityResult (requestCode, resultCode, data);
 
 			if (resultCode == Result.Ok) {
-				bIsPhotoMake = false;
 				// Make it available in the gallery
 				Intent mediaScanIntent = new Intent (Intent.ActionMediaScannerScanFile);
 				Android.Net.Uri contentUri = Android.Net.Uri.FromFile (file);
@@ -436,26 +451,6 @@ namespace DroidTest.Lib.Fragments
 				text.Text += String.Format(@"TagGpsDatestamp : {0} \n", exif.GetAttribute (ExifInterface.TagGpsDatestamp));
 				text.Text += String.Format(@"TagIso : {0} \n", exif.GetAttribute (ExifInterface.TagIso));
 				text.Text += String.Format(@"TagDatetime : {0} \n", exif.GetAttribute (ExifInterface.TagDatetime));
-
-				AttendancePhoto attPhoto = new AttendancePhoto () { id = -1,  photoPath = file.ToString ()};
-				DateTime dtStamp;
-				if (DateTime.TryParse (exif.GetAttribute (ExifInterface.TagDatetime), out dtStamp)){
-					attPhoto.stamp = dtStamp;
-				};
-
-				float gps;
-				if (float.TryParse (exif.GetAttribute (ExifInterface.TagGpsLatitude), out gps)){
-					attPhoto.latitude = gps;
-				};
-
-				if (float.TryParse (exif.GetAttribute (ExifInterface.TagGpsLongitude), out gps)){
-					attPhoto.longitude = gps;
-				};
-
-				attPhoto.latitude = convertToDegree (exif.GetAttribute (ExifInterface.TagGpsLatitude));
-				attPhoto.longitude = convertToDegree (exif.GetAttribute (ExifInterface.TagGpsLongitude));
-
-				newAttendancePhotos.Add (attPhoto);
 			}
 
 			// Dispose of the Java side bitmap.

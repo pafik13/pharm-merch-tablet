@@ -1,0 +1,67 @@
+using System;
+using System.Collections.Generic;
+
+using RestSharp;
+
+namespace DroidTest.Lib.Entities
+{
+	[Serializable]
+	public class Attendance: IEntity
+	{
+		public Attendance (DateTime dateOfAttendance, List<Info> infos, List<Drug> drugs, string defaultValue = null)
+		{
+			if (string.IsNullOrEmpty (defaultValue)) {
+				defaultValue = string.Empty;
+			}
+
+			date = dateOfAttendance;
+
+			results = new List<AttendanceResult> ();
+			foreach (var info in infos) {
+				foreach (var drug in drugs) {
+					results.Add (new AttendanceResult () {
+						info = info.id,
+						drug = drug.id,
+						value = defaultValue
+					});
+				}
+			}
+		}
+
+		public int id { get; set; }
+		public int pharmacy { get; set; }
+		public DateTime date { get; set; }
+		public List<AttendanceResult> results { get; set; }
+
+		public static string InvertStringBool(string b)
+		{
+			if (b.Equals (@"Y")) {
+				return @"N";
+			} else {
+				return @"Y";
+			}
+		}
+
+		public static string StringBoolToRussian(string b)
+		{
+			if (b.Equals (@"Y")) {
+				return @"Да";
+			} else {
+				return @"Нет";
+			}
+		}
+	}
+
+	[Serializable]
+	public class AttendanceResult: IEntity
+	{
+		public AttendanceResult()
+		{
+		}
+
+		public int id	{ get; set; }
+		public int info { get; set; }
+		public int drug { get; set; }
+		public string value { get; set; }
+	}
+}

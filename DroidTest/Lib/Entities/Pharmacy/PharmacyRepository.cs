@@ -12,7 +12,7 @@ namespace DroidTest.Lib.Entities.Pharmacy
 {
 	public class PharmacyRepository
 	{
-		static string fUserName;	
+		static string fUserName;
 		static List<Pharmacy> pharmacies;
 
 		static PharmacyRepository ()
@@ -86,13 +86,18 @@ namespace DroidTest.Lib.Entities.Pharmacy
 				select pharm);
 		}
 
+		public static IEnumerable<Pharmacy> GetPharmacies (int[] ids)
+		{
+			return (pharmacies.Where(pharm => ids.Contains(pharm.id)));
+		}
+
 		/// <summary>
 		/// Insert or update a Doctor
 		/// </summary>
 		public static int SavePharmacy (Pharmacy item)
-		{ 
+		{
 			var max = 0;
-			if (pharmacies.Count > 0) 
+			if (pharmacies.Count > 0)
 				max = pharmacies.Max(x => x.id);
 
 			if (item.id == 0) {
@@ -108,7 +113,7 @@ namespace DroidTest.Lib.Entities.Pharmacy
 			}
 
 			WriteXml ();
-			return max;
+			return item.id;
 		}
 
 		public static int DeletePharmacy (int id)

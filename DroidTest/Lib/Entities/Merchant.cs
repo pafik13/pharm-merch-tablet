@@ -3,7 +3,7 @@ using DroidTest.Lib.Entities;
 
 using RestSharp;
 
-namespace DroidTest.Lib.Entities.Merchant
+namespace DroidTest.Lib.Entities
 {
     [Serializable]
     public class Merchant : IEntity

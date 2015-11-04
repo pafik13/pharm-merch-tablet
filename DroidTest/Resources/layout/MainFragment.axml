@@ -4,6 +4,32 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:background="@drawable/bottomline">
+        <TextView
+            android:text="ТЕКУЩАЯ АПТЕКА"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mfSelectedPharmacyText"
+            android:gravity="center"
+            android:textColor="#03A9F4"
+            android:height="68dp"
+            android:paddingRight="24dp"
+            android:paddingLeft="24dp" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/mfSelectedPharmacyText"
+            android:id="@+id/mfSelectedPharmacySpinner"
+            android:minHeight="68dp"
+            android:minWidth="168dp" />
+    </RelativeLayout>
+    <RelativeLayout
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"

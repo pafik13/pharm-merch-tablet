@@ -53,8 +53,7 @@ namespace DroidTest.Lib.Fragments
 			data [0] = DateTime.Now.Date.ToString ();
 			data [1] = DateTime.Now.Date.AddDays(1).ToString ();
 
-			ArrayAdapter adapter = new ArrayAdapter (Activity,
-				Android.Resource.Layout.SimpleSpinnerItem, data);
+			ArrayAdapter adapter = new ArrayAdapter (Activity, Android.Resource.Layout.SimpleSpinnerItem, data);
 
 			spnDatePicker.Adapter = adapter;
 

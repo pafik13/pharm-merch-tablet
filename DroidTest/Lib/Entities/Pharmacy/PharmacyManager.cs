@@ -34,10 +34,15 @@ namespace DroidTest.Lib.Entities.Pharmacy
 			}
 		}
 
+		public static IList<Pharmacy> GetPharmacies (int[] ids)
+		{
+			return new List<Pharmacy> (PharmacyRepository.GetPharmacies (ids));
+		}
+
 		public static int SavePharmacy (Pharmacy item)
 		{
 			JsonSerializerSettings jsonSerSet = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
-			string json = JsonConvert.SerializeObject( item, Formatting.Indented,jsonSerSet); 
+			string json = JsonConvert.SerializeObject( item, Formatting.Indented,jsonSerSet);
 			var bytes = Encoding.Default.GetBytes (json);
 
 			Pharmacy afterUpload = null;
@@ -51,6 +56,15 @@ namespace DroidTest.Lib.Entities.Pharmacy
 			}
 
 			return PharmacyRepository.SavePharmacy(afterUpload);
+		}
+
+		public static string [] ToArray(List<Pharmacy> pharmacies)
+		{
+			string [] result = new string[pharmacies.Count];
+			for (int i = 0; i < pharmacies.Count; i++) {
+				result [i] = pharmacies [i].fullName;
+			}
+			return result;
 		}
 
 		public static int DeletePharmacy(int id)

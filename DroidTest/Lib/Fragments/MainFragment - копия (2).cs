@@ -24,10 +24,6 @@ namespace DroidTest.Lib.Fragments
 {
 	public class MainFragment : Fragment
 	{
-		const int MENU_PHOTO = 2;
-
-		private bool bIsPhotoMake = false;
-
 		private User user = null;
 		private Merchant merchant = null;
 		private Rout currentRout = null;
@@ -62,28 +58,36 @@ namespace DroidTest.Lib.Fragments
 
 			// Use this to return your custom view for this Fragment
 			// return inflater.Inflate(Resource.Layout.YourFragment, container, false);
-
-			View rootView = inflater.Inflate(Resource.Layout.MainFragment, container, false);
-
-			text = rootView.FindViewById<TextView> (Resource.Id.largeText);
-
 			user = Common.GetCurrentUser ();
-
-			if (user == null) {
-				text.Text = @"НЕТ ПРЕПАРАТОВ ИЛИ СОБИРАЕМОЙ ИНФОРМАЦИИ";
-				text.SetTextAppearance (Activity, Resource.Style.text_danger);
-
-				miAddAtt.SetEnabled (false);
-				return rootView;
-			}
-
 			merchant = Common.GetMerchant (user.username);
+//			currentRout = GetRout ();
+//			int[] ids = {1,2,3,4,5};
+//			currentPharmacies = (List<Pharmacy>)PharmacyManager.GetPharmacies (ids);
 
 			currentPharmacies = (List<Pharmacy>)PharmacyManager.GetPharmacies (string.Empty, 20);
 
 			infos = Common.GetInfos (user.username);
+				
+//			infos = new List<Info>();
+//			infos.Add (new Info {id = 2, name = @"Кол-во" });
+//			infos.Add (new Info {id = 4, name = @"Розница" });
+//			infos.Add (new Info {id = 6, name = @"Заказано" });
 
 			drugs = Common.GetDrugs (user.username);
+
+//			AttendanceResultManager.DeleteAttendanceResult (1);
+////			var att = new Attendance (1, new DateTime (2015, 10, 28), infos, drugs, @"N");
+//			var att = new Attendance() { id = 1, date = new DateTime (2015, 10, 28), pharmacy = 1 };
+//			AttendanceManager.SaveAttendance (att);
+//
+//			var res = AttendanceResultManager.GenerateResults(infos, drugs, @"N");
+//			AttendanceResultManager.SaveNewAttendanceResults (att.id, res);
+
+			View rootView = inflater.Inflate(Resource.Layout.MainFragment, container, false);
+
+			text = rootView.FindViewById<TextView> (Resource.Id.largeText);
+			text.Text = @"НЕТ ПРЕПАРАТОВ ИЛИ СОБИРАЕМОЙ ИНФОРМАЦИИ";
+			text.SetTextAppearance (Activity, Resource.Style.text_danger);
 
 			table = rootView.FindViewById<TableLayout> (Resource.Id.mfFullContent);
 
@@ -100,6 +104,9 @@ namespace DroidTest.Lib.Fragments
 
 				RefreshTable();
 			};
+
+
+
 
 			spnSelectedPharmacy.SetSelection (0);
 
@@ -301,7 +308,7 @@ namespace DroidTest.Lib.Fragments
 
 //			miAddAtt.Id
 
-			miAddPhoto = menu.Add(1, MENU_PHOTO, 2, @"Добавить фото");
+			miAddPhoto = menu.Add(1, 2, 2, @"Добавить фото");
 			miAddPhoto.SetIcon (Resource.Drawable.ic_camera_alt_white_48dp);
 			miAddPhoto.SetEnabled (false);
 
@@ -357,14 +364,12 @@ namespace DroidTest.Lib.Fragments
 				Log.Info ("ifSignInButton", "Click");
 				break;
 			case Resource.Id.add_photo:
-			case MENU_PHOTO:
 				Toast.MakeText (Activity, @"add_photo click", ToastLength.Short).Show ();
 
 				if (Common.CreateDirForPhotos (user)) {
 					Intent intent = new Intent (MediaStore.ActionImageCapture);
 					file = new Java.IO.File (Common.GetDirForPhotos(user), String.Format("myPhoto_{0}.jpg", Guid.NewGuid()));
 					intent.PutExtra (MediaStore.ExtraOutput, Android.Net.Uri.FromFile (file));
-					bIsPhotoMake = true;
 					StartActivityForResult (intent, 0);
 				}
 
@@ -380,41 +385,13 @@ namespace DroidTest.Lib.Fragments
 		{
 			base.OnPause ();
 
-			if (!bIsPhotoMake) {
-				if (newAttendance != null) {
-					int attID = AttendanceManager.SaveAttendance (newAttendance);
-					AttendanceResultManager.SaveNewAttendanceResults (attID, newAttendanceResults);
+			if (newAttendance != null) {
+				int attID = AttendanceManager.SaveAttendance (newAttendance);
+				AttendanceResultManager.SaveNewAttendanceResults (attID, newAttendanceResults);
 
-					newAttendance = null;
-					newAttendanceResults = null;
-				}
+				newAttendance = null;
+				newAttendanceResults = null;
 			}
-		}
-
-		private float convertToDegree(String stringDMS){
-			float result = 0.0f;
-			char[] spl1 = new char[1] { ',' };
-			string[] DMS = stringDMS.Split(spl1, 3);
-
-			char[] spl2 = new char[1] { '/' };
-			string[] stringD = DMS[0].Split(spl2, 2);
-			double D0 = double.Parse((stringD[0]));
-			double D1 = double.Parse(stringD[1]);
-			double FloatD = D0/D1;
-
-			string[] stringM = DMS[1].Split(spl2, 2);
-			double M0 = double.Parse(stringM[0]);
-			double M1 = double.Parse(stringM[1]);
-			double FloatM = M0/M1;
-
-			string[] stringS = DMS[2].Split(spl2, 2);
-			double S0 = double.Parse(stringS[0]);
-			double S1 = double.Parse(stringS[1]);
-			double FloatS = S0/S1;
-
-			result = (float)(FloatD + (FloatM/60) + (FloatS/3600));
-
-			return result;
 		}
 
 		public override void OnActivityResult (int requestCode, Result resultCode, Intent data)
@@ -422,7 +399,6 @@ namespace DroidTest.Lib.Fragments
 			base.OnActivityResult (requestCode, resultCode, data);
 
 			if (resultCode == Result.Ok) {
-				bIsPhotoMake = false;
 				// Make it available in the gallery
 				Intent mediaScanIntent = new Intent (Intent.ActionMediaScannerScanFile);
 				Android.Net.Uri contentUri = Android.Net.Uri.FromFile (file);
@@ -451,9 +427,6 @@ namespace DroidTest.Lib.Fragments
 				if (float.TryParse (exif.GetAttribute (ExifInterface.TagGpsLongitude), out gps)){
 					attPhoto.longitude = gps;
 				};
-
-				attPhoto.latitude = convertToDegree (exif.GetAttribute (ExifInterface.TagGpsLatitude));
-				attPhoto.longitude = convertToDegree (exif.GetAttribute (ExifInterface.TagGpsLongitude));
 
 				newAttendancePhotos.Add (attPhoto);
 			}

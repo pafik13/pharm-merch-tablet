@@ -138,6 +138,10 @@ namespace DroidTest
 					fragment = new RoutFragment ();
 					fragment.Arguments = args;	
 					break;
+			case MainMenu.SYNC:
+				fragment = new SyncFragment ();
+				fragment.Arguments = args;	
+				break;
 				default:
 					fragment = new MyFragment();
 			
@@ -209,6 +213,7 @@ namespace DroidTest
 		public const string SETTINGS = @"4_SETTINGS";
 		public const string INFO	 = @"5_INFO";
 		public const string ABOUT    = @"6_ABOUT";
+		public const string SYNC	 = @"7_SYNC";
 
 		static SortedList <string, string> menuDict;
 		static string[] menuItems;
@@ -224,6 +229,7 @@ namespace DroidTest
 				menuDict.Add (SETTINGS, @"Настройки");
 				menuDict.Add (INFO, @"Информация");
 				menuDict.Add (ABOUT, @"О программе");
+				menuDict.Add (SYNC, @"Синхронизация");
 
 				RefreshMenuItems ();
 			}
