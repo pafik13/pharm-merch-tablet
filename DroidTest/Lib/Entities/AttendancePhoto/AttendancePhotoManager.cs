@@ -40,6 +40,11 @@ namespace DroidTest.Lib.Entities
 			return AttendancePhotoRepository.SaveNewAttendancePhotos(attendanceID, photos);
 		}
 
+		public static bool CorrectAttendanceForSync(int oldAttendance, int newAttendance)
+		{
+			return AttendancePhotoRepository.CorrectAttendanceForSync (oldAttendance, newAttendance);
+		}
+
 		public static int DeleteAttendancePhoto(int id)
 		{
 			return AttendancePhotoRepository.DeleteAttendancePhoto(id);

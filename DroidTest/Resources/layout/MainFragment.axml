@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="#E0E0E0">
     <RelativeLayout
+        android:id="@+id/mfUpPanelRL"
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -28,13 +30,25 @@
             android:id="@+id/mfSelectedPharmacySpinner"
             android:minHeight="68dp"
             android:minWidth="168dp" />
+        <TextView
+            android:text="КОЛИЧЕСТВО ФОТО : "
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mfPhotoCountText"
+            android:gravity="center"
+            android:textColor="#03A9F4"
+            android:height="68dp"
+            android:paddingRight="24dp"
+            android:paddingLeft="24dp"
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/mfRelativeLayout"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/mfRelativeLayout">
+        android:layout_height="wrap_content">
         <HorizontalScrollView
             android:minWidth="25px"
             android:minHeight="25px"

@@ -114,6 +114,7 @@ namespace DroidTest.Lib.Fragments
 			table.RemoveAllViews ();
 
 			TableRow header = new TableRow (Activity);
+//			header.
 			header.SetMinimumHeight (88);
 			TableRow.LayoutParams hParamsDrug = new TableRow.LayoutParams ();
 			hParamsDrug.Height = TableLayout.LayoutParams.WrapContent;
@@ -126,18 +127,20 @@ namespace DroidTest.Lib.Fragments
 			hDrug.LayoutParameters = hParamsDrug;
 			header.AddView(hDrug);
 
-			TableRow.LayoutParams p = new TableRow.LayoutParams ();
-			p.Height = TableLayout.LayoutParams.WrapContent;
-			p.Width = TableLayout.LayoutParams.WrapContent;
-			p.Gravity = GravityFlags.Center;
+			TableRow.LayoutParams lpRow = new TableRow.LayoutParams ();
+			lpRow.Height = TableLayout.LayoutParams.WrapContent;
+			lpRow.Width = TableLayout.LayoutParams.WrapContent;
+			lpRow.Gravity = GravityFlags.Center;
 
-			TableLayout tlHeader = new TableLayout (Activity);
-			TableRow rAttendance = new TableRow (Activity);
+//			TableLayout.LayoutParams pp = new TableLayout.LayoutParams ();
+//			pp.
+//			TableLayout tlHeader = new TableLayout (Activity);
+//			TableRow rAttendance = new TableRow (Activity);
 
 			foreach (var attendace in currentAttendances) {
 				TextView hAttendace = new TextView (Activity);
 				hAttendace.Text = attendace.date.ToString(@"dd-MMM ddd");
-				hAttendace.LayoutParameters = p;
+				hAttendace.LayoutParameters = lpRow;
 				hAttendace.Rotation = -70;
 				header.AddView (hAttendace);
 //				rAttendance.AddView(hAttendace);
@@ -161,7 +164,7 @@ namespace DroidTest.Lib.Fragments
 				//				v.Text = GetInfo(info.infoID).name;
 				//				v.SetHorizontallyScrolling (false);
 				v.Text = info.name;
-				v.LayoutParameters = p;
+				v.LayoutParameters = lpRow;
 
 				r.AddView (v);
 
@@ -181,16 +184,28 @@ namespace DroidTest.Lib.Fragments
 					//					vv.Text = drugInfo.drugID.ToString();
 					//					vv.Text = GetDrug(drugInfo.drugID).fullName;
 					vv.Text = drug.fullName;
-					vv.LayoutParameters = p;
+					vv.LayoutParameters = lpRow;
+					vv.SetBackgroundColor (Android.Graphics.Color.White);
 					rr.AddView (vv);
 
 					foreach (var attendace in currentAttendances) {
+						
+						TableRow.LayoutParams lpValue = new TableRow.LayoutParams ();
+						lpValue.Height = TableLayout.LayoutParams.WrapContent;
+						lpValue.Width = TableLayout.LayoutParams.WrapContent;
+						lpValue.Gravity = GravityFlags.Center;
+						lpValue.SetMargins (1, 1, 1, 1);
+
 						RelativeLayout rl = new RelativeLayout(Activity);
 						rl.SetGravity (GravityFlags.Center);
 						rl.SetMinimumHeight (68);
 						rl.SetMinimumWidth (68);
-						rl.LayoutParameters = p;
+						rl.LayoutParameters = lpValue;
+
 						rl.Id = attendace.id;
+						rl.SetTag (Resource.String.IDinfo, info.id);
+						rl.SetTag (Resource.String.IDdrug, drug.id);
+						rl.SetTag (Resource.String.IDattendance, attendace.id);
 
 						string value = string.Empty;
 						if (attendace.id != -1) {
@@ -230,18 +245,24 @@ namespace DroidTest.Lib.Fragments
 		void Rl_Click (object sender, EventArgs e)
 		{
 			RelativeLayout rlAttendace = (RelativeLayout) sender;
+
+			int IDattendance = (int) rlAttendace.GetTag(Resource.String.IDattendance);
+			int IDdrug = (int) rlAttendace.GetTag(Resource.String.IDdrug);
+			int IDinfo = (int) rlAttendace.GetTag(Resource.String.IDinfo);
+
 			TableRow trDrug = (TableRow) rlAttendace.Parent;
 			TableLayout trInfo = (TableLayout) rlAttendace.Parent.Parent;
 
-			string message = string.Format(@"Click to RL.id:{0}, P,id:{1}, PP.id:{2}", rlAttendace.Id, trDrug.Id, trInfo.Id);
+//			string message = string.Format(@"Click {0} to RL.id:{1}, P,id:{2}, PP.id:{3}", tag, rlAttendace.Id, trDrug.Id, trInfo.Id);
+			string message = string.Format(@"Click to IDattendance:{0}, IDdrug:{1}, IDinfo:{2}", IDattendance, IDdrug, IDinfo);
 
 			Toast.MakeText(Activity,  message, ToastLength.Short).Show();
 
-			string value = AttendanceResultManager.GetResultValue(newAttendanceResults, trInfo.Id, trDrug.Id);
+			string value = AttendanceResultManager.GetResultValue(newAttendanceResults, IDinfo, IDdrug);
 
 			value = AttendanceResult.InvertStringBool(value);
 
-			AttendanceResultManager.SetResultValue(newAttendanceResults, trInfo.Id, trDrug.Id, value);
+			AttendanceResultManager.SetResultValue(newAttendanceResults, IDinfo, IDdrug, value);
 
 			RefreshTable();
 		}
@@ -327,7 +348,7 @@ namespace DroidTest.Lib.Fragments
 					miAddAtt.SetIcon (Resource.Drawable.ic_add_circle_outline_white_48dp);
 					miAddAtt.SetTitle (@"Начать посещение");
 				} else {
-					newAttendance = new Attendance () { id = -1, date = DateTime.Now.Date, pharmacy = selectedPharmacy, merchant = merchant.id};
+					newAttendance = new Attendance () { id = -1, date = DateTime.Now, pharmacy = selectedPharmacy, merchant = merchant.id};
 					newAttendanceResults = AttendanceResultManager.GenerateResults (infos, drugs, @"N");
 					newAttendancePhotos = new List<AttendancePhoto> ();
 					currentAttendances.Add (newAttendance);
@@ -362,7 +383,7 @@ namespace DroidTest.Lib.Fragments
 
 				if (Common.CreateDirForPhotos (user)) {
 					Intent intent = new Intent (MediaStore.ActionImageCapture);
-					file = new Java.IO.File (Common.GetDirForPhotos(user), String.Format("myPhoto_{0}.jpg", Guid.NewGuid()));
+					file = new Java.IO.File (Common.GetDirForPhotos(user), String.Format("photo_{0}.jpg", Guid.NewGuid()));
 					intent.PutExtra (MediaStore.ExtraOutput, Android.Net.Uri.FromFile (file));
 					bIsPhotoMake = true;
 					StartActivityForResult (intent, 0);
@@ -393,28 +414,30 @@ namespace DroidTest.Lib.Fragments
 
 		private float convertToDegree(String stringDMS){
 			float result = 0.0f;
-			char[] spl1 = new char[1] { ',' };
-			string[] DMS = stringDMS.Split(spl1, 3);
+			if (string.IsNullOrEmpty(stringDMS)) {
+				return result;
+			} else {
+				char[] spl1 = new char[1] { ',' };
+				string[] DMS = stringDMS.Split(spl1, 3);
 
-			char[] spl2 = new char[1] { '/' };
-			string[] stringD = DMS[0].Split(spl2, 2);
-			double D0 = double.Parse((stringD[0]));
-			double D1 = double.Parse(stringD[1]);
-			double FloatD = D0/D1;
+				char[] spl2 = new char[1] { '/' };
+				string[] stringD = DMS[0].Split(spl2, 2);
+				double D0 = double.Parse((stringD[0]));
+				double D1 = double.Parse(stringD[1]);
+				double FloatD = D0/D1;
 
-			string[] stringM = DMS[1].Split(spl2, 2);
-			double M0 = double.Parse(stringM[0]);
-			double M1 = double.Parse(stringM[1]);
-			double FloatM = M0/M1;
+				string[] stringM = DMS[1].Split(spl2, 2);
+				double M0 = double.Parse(stringM[0]);
+				double M1 = double.Parse(stringM[1]);
+				double FloatM = M0/M1;
 
-			string[] stringS = DMS[2].Split(spl2, 2);
-			double S0 = double.Parse(stringS[0]);
-			double S1 = double.Parse(stringS[1]);
-			double FloatS = S0/S1;
+				string[] stringS = DMS[2].Split(spl2, 2);
+				double S0 = double.Parse(stringS[0]);
+				double S1 = double.Parse(stringS[1]);
+				double FloatS = S0/S1;
 
-			result = (float)(FloatD + (FloatM/60) + (FloatS/3600));
-
-			return result;
+				return (float)(FloatD + (FloatM/60) + (FloatS/3600));
+			}
 		}
 
 		public override void OnActivityResult (int requestCode, Result resultCode, Intent data)

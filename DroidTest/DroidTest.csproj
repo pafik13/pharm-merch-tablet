@@ -96,6 +96,7 @@
     <Compile Include="Lib\Entities\AttendancePhoto\AttendancePhotoRepository.cs" />
     <Compile Include="Lib\Entities\AttendancePhoto\AttendancePhotoManager.cs" />
     <Compile Include="Lib\Entities\AttendancePhoto\AttendancePhoto.cs" />
+    <Compile Include="Lib\UpLoad.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

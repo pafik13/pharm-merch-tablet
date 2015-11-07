@@ -1,6 +1,9 @@
 ﻿
 using System;
+using System.IO;
 using System.Net;
+using System.Globalization;
+using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,8 +17,11 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 
+using Newtonsoft.Json;
+
 using RestSharp;
 using RestSharp.Authenticators;
+using RestSharp.Deserializers;
 
 using DroidTest.Lib.Entities;
 using DroidTest.Lib.Entities.Pharmacy;
@@ -76,16 +82,18 @@ namespace DroidTest.Lib.Fragments
 				new Thread(new ThreadStart(delegate
 					{
 						//LOAD METHOD TO GET ACCOUNT INFO
-						Activity.RunOnUiThread(() => progressDialog.SetMessage(@"Загрузка посещений"));
+						Activity.RunOnUiThread(() => progressDialog.SetMessage(@"Начало загрузки информации о посещениях"));
 
 						UpLoadAttendances();
 						UpLoadAttendanceResults();
+						UpLoadAttendancePhotos();
 
-						Thread.Sleep(6000);
 						//HIDE PROGRESS DIALOG
-						Activity.RunOnUiThread(() => progressDialog.Dismiss()); //progressBar.Visibility = ViewStates.Gone);
+						Activity.RunOnUiThread(() => { progressDialog.SetMessage(@"Обновление данных"); RefreshContent(); progressDialog.Dismiss(); }); //progressBar.Visibility = ViewStates.Gone);
 					})).Start();
 			};
+
+			Activity.Window.AddFlags (WindowManagerFlags.KeepScreenOn);
 
 			return view;
 		}
@@ -95,57 +103,73 @@ namespace DroidTest.Lib.Fragments
 			string cookieName = string.Empty;
 			string cookieValue = string.Empty;
 			var user = Common.GetCurrentUser ();
+
+			var login = new RestClient(@"http://sbl-logisapp.rhcloud.com/");
+
+			//login.Authenticator = new SimpleAuthenticator("identifier", "lyubin.p@gmail.com", "password", "q1234567");
+			login.Authenticator = new SimpleAuthenticator("identifier", user.username, "password", user.password);
+			login.CookieContainer = new CookieContainer();
+
+			var request = new RestRequest(@"auth/local", Method.POST);
+			var response = login.Execute<User>(request);
+			User userRes = response.Data;
+
+			if (userRes == null)
+			{
+				Activity.RunOnUiThread(() => progressDialog.SetMessage(@"Не удалось пройти аутентификацию!"));
+				return;
+			}
+
+			cookieName = response.Cookies[0].Name;
+			cookieValue = response.Cookies[0].Value;
+
 			var queueToUpload = (List<SyncQueue>) SyncQueueManager.GetSyncQueue(selectedDate);
 			foreach (var q in queueToUpload) {
 				if (( q.type == SyncQueueType.sqtAttendance) && (!q.isSync)) {
-					var login = new RestClient(@"http://sbl-logisapp.rhcloud.com/");
-
-					//login.Authenticator = new SimpleAuthenticator("identifier", "lyubin.p@gmail.com", "password", "q1234567");
-					login.Authenticator = new SimpleAuthenticator("identifier", user.username, "password", user.password);
-					login.CookieContainer = new CookieContainer();
-
-					var request = new RestRequest(@"auth/local", Method.POST);
-					var response = login.Execute<User>(request);
-					User userRes = response.Data;
-
-					if (userRes == null)
-					{
-						Activity.RunOnUiThread(() => progressDialog.SetMessage(@"Не удалось пройти аутентификацию!"));
-					}
-
-					cookieName = response.Cookies[0].Name;
-					cookieValue = response.Cookies[0].Value;
 
 					var client = new RestClient(@"http://sbl-logisapp.rhcloud.com/");
 
 					//Debug.WriteLine(@"Получение информации о себе.", @"Info");
-					Attendance attendance = SyncQueueManager.GetAttendace(q.fileLoacation);
-					Activity.RunOnUiThread(() => progressDialog.SetMessage(string.Format(@"Загрузка посещения с id:{0}", attendance.id)));
+					Attendance oldAttendance = SyncQueueManager.GetAttendace(q.fileLoacation);
+					Activity.RunOnUiThread(() => progressDialog.SetMessage(string.Format(@"Загрузка посещения с id:{0}", oldAttendance.id)));
 					request = new RestRequest(@"Attendance/", Method.POST);
 					request.AddCookie(cookieName, cookieValue);
 					request.RequestFormat = DataFormat.Json;
 					request.JsonSerializer.ContentType = "application/json; charset=utf-8";
-					request.AddBody(attendance);
-					var response1 = client.Execute(request);
+					int oldID = oldAttendance.id;
+					oldAttendance.id = 0;
+					request.AddBody(oldAttendance);
+					var respAttendance = client.Execute<Attendance>(request);
 
-					switch (response1.StatusCode) {
+					Attendance newAttendance = respAttendance.Data;
+					oldAttendance.id = oldID;
+//					Thread.Sleep (500);
+
+					switch (respAttendance.StatusCode) {
 					case HttpStatusCode.OK:
 					case HttpStatusCode.Created:
-						q.isSync = true;
-						SyncQueueManager.SaveSyncQueue (q);
-						Activity.RunOnUiThread(() => { 
-							progressDialog.SetMessage(string.Format(@"Посещение с id:{0} ЗАГРУЖЕНО!", attendance.id));
-							RefreshContent();
-						});
+						if (AttendanceResultManager.CorrectAttendanceForSync (oldAttendance.id, newAttendance.id)
+							&& AttendancePhotoManager.CorrectAttendanceForSync (oldAttendance.id, newAttendance.id)
+							&& AttendanceManager.CorrectAfterSync (oldAttendance, newAttendance)) {
+							q.isSync = true;
+							SyncQueueManager.SaveSyncQueue (q);
+							Activity.RunOnUiThread (() => { 
+								progressDialog.SetMessage (string.Format (@"Посещение с id:{0} ЗАГРУЖЕНО!", oldAttendance.id));
+//								RefreshContent ();
+							});
+						} else {
+							Activity.RunOnUiThread (() => { 
+								progressDialog.SetMessage (string.Format (@"Не удалось скорректировать данные для посещения с id:{0} ОШИБКА!", oldAttendance.id));
+//								RefreshContent ();
+							});
+						}
 						continue;
 					default:
+//						Thread.Sleep (500);
 						Activity.RunOnUiThread(() => progressDialog.SetMessage(@"Не удалось загрузить посещение!"));
+//						Thread.Sleep (1500);
 						break;
 					}
-//					if ()
-//					{
-//						//Debug.WriteLine(@"Не удалось сохранить информации о себе", @"Error");
-//					}
 				}
 			}
 		}
@@ -155,27 +179,28 @@ namespace DroidTest.Lib.Fragments
 			string cookieName = string.Empty;
 			string cookieValue = string.Empty;
 			var user = Common.GetCurrentUser ();
+
+			var login = new RestClient(@"http://sbl-logisapp.rhcloud.com/");
+
+			//login.Authenticator = new SimpleAuthenticator("identifier", "lyubin.p@gmail.com", "password", "q1234567");
+			login.Authenticator = new SimpleAuthenticator("identifier", user.username, "password", user.password);
+			login.CookieContainer = new CookieContainer();
+
+			var request = new RestRequest(@"auth/local", Method.POST);
+			var response = login.Execute<User>(request);
+			User userRes = response.Data;
+
+			if (userRes == null)
+			{
+				Activity.RunOnUiThread(() => progressDialog.SetMessage(@"Не удалось пройти аутентификацию!"));
+			}
+
+			cookieName = response.Cookies[0].Name;
+			cookieValue = response.Cookies[0].Value;
+
 			var queueToUpload = (List<SyncQueue>) SyncQueueManager.GetSyncQueue(selectedDate);
 			foreach (var q in queueToUpload) {
 				if (( q.type == SyncQueueType.sqtAttendanceResult) && (!q.isSync)) {
-					var login = new RestClient(@"http://sbl-logisapp.rhcloud.com/");
-
-					//login.Authenticator = new SimpleAuthenticator("identifier", "lyubin.p@gmail.com", "password", "q1234567");
-					login.Authenticator = new SimpleAuthenticator("identifier", user.username, "password", user.password);
-					login.CookieContainer = new CookieContainer();
-
-					var request = new RestRequest(@"auth/local", Method.POST);
-					var response = login.Execute<User>(request);
-					User userRes = response.Data;
-
-					if (userRes == null)
-					{
-						Activity.RunOnUiThread(() => progressDialog.SetMessage(@"Не удалось пройти аутентификацию!"));
-					}
-
-					cookieName = response.Cookies[0].Name;
-					cookieValue = response.Cookies[0].Value;
-
 					var client = new RestClient(@"http://sbl-logisapp.rhcloud.com/");
 
 					//Debug.WriteLine(@"Получение информации о себе.", @"Info");
@@ -186,34 +211,101 @@ namespace DroidTest.Lib.Fragments
 					request.AddCookie(cookieName, cookieValue);
 					request.RequestFormat = DataFormat.Json;
 					request.JsonSerializer.ContentType = "application/json; charset=utf-8";
+					attendanceResult.id = 0;
 					request.AddBody(attendanceResult);
-					var response1 = client.Execute(request);
+					var respAttendanceResult = client.Execute(request);
 
-					switch (response1.StatusCode) {
+					switch (respAttendanceResult.StatusCode) {
 					case HttpStatusCode.OK:
 					case HttpStatusCode.Created:
 						q.isSync = true;
 						SyncQueueManager.SaveSyncQueue (q);
+//						Thread.Sleep (500);
 						Activity.RunOnUiThread(() => { 
 							progressDialog.SetMessage(string.Format(@"@""Значение с id {0} по посещению с id:{1}"" ЗАГРУЖЕНО!", attendanceResult.id, attendance.id));
-							RefreshContent();
+//							RefreshContent();
 						});
 						continue;
 					default:
+//						Thread.Sleep (500);
 						Activity.RunOnUiThread(() => progressDialog.SetMessage(@"Не удалось загрузить значение по посещению!"));
+//						Thread.Sleep (1500);
 						break;
 					}
-					//					if ()
-					//					{
-					//						//Debug.WriteLine(@"Не удалось сохранить информации о себе", @"Error");
-					//					}
 				}
 			}
+		}
+
+		void UpLoadAttendancePhotos()
+		{
+			string cookieName = string.Empty;
+			string cookieValue = string.Empty;
+			var user = Common.GetCurrentUser ();
+
+			var login = new RestClient(@"http://sbl-logisapp.rhcloud.com/");
+
+			//login.Authenticator = new SimpleAuthenticator("identifier", "lyubin.p@gmail.com", "password", "q1234567");
+			login.Authenticator = new SimpleAuthenticator("identifier", user.username, "password", user.password);
+			login.CookieContainer = new CookieContainer();
+
+			var loginReq = new RestRequest(@"auth/local", Method.POST);
+			var loginRes = login.Execute<User>(loginReq);
+			User userRes = loginRes.Data;
+
+			if (userRes == null)
+			{
+				Activity.RunOnUiThread(() => progressDialog.SetMessage(@"Не удалось пройти аутентификацию!"));
+			}
+
+			cookieName = loginRes.Cookies[0].Name;
+			cookieValue = loginRes.Cookies[0].Value;
+
+			var queueToUpload = (List<SyncQueue>) SyncQueueManager.GetSyncQueue(selectedDate);
+			foreach (var q in queueToUpload) {
+				if (( q.type == SyncQueueType.sqtAttendancePhoto) && (!q.isSync)) {
+					//Debug.WriteLine(@"Получение информации о себе.", @"Info");
+					AttendancePhoto attendancePhoto = SyncQueueManager.GetAttendancePhoto(q.fileLoacation);
+					Attendance attendance = AttendanceManager.GetAttendance (attendancePhoto.attendance);
+					Activity.RunOnUiThread(() => progressDialog.SetMessage(string.Format(@"Загрузка фото с id {0} по посещению с id:{1}", attendancePhoto.id, attendance.id)));
+
+					var client = new RestClient(@"http://sbl-logisapp.rhcloud.com/");
+
+					var request = new RestRequest (@"AttendancePhoto/create?attendance={attendance}&longitude={longitude}&latitude={latitude}&stamp={stamp}", Method.POST);
+					request.AddCookie(cookieName, cookieValue);
+					request.AddUrlSegment(@"attendance", attendancePhoto.attendance.ToString());
+					request.AddUrlSegment(@"longitude", attendancePhoto.longitude.ToString(CultureInfo.CreateSpecificCulture("en-GB")));
+					request.AddUrlSegment(@"latitude", attendancePhoto.latitude.ToString(CultureInfo.CreateSpecificCulture("en-GB")));
+					request.AddUrlSegment(@"stamp", attendancePhoto.stamp.ToString());
+					request.AddFile (@"photo", File.ReadAllBytes (attendancePhoto.photoPath), Path.GetFileName (attendancePhoto.photoPath), string.Empty);
+
+					var response = client.Execute(request);
+
+					switch (response.StatusCode) {
+					case HttpStatusCode.OK:
+					case HttpStatusCode.Created:
+//					case HttpStatusCode.U
+						q.isSync = true;
+						SyncQueueManager.SaveSyncQueue (q);
+//						Thread.Sleep (500);
+						Activity.RunOnUiThread(() => {
+							progressDialog.SetMessage(string.Format(@"Фото с id {0} по посещению с id:{1}"" ЗАГРУЖЕНО!", attendancePhoto.id, attendance.id));
+//							RefreshContent();
+						});
+						continue;
+					default:
+//						Thread.Sleep (500);
+						Activity.RunOnUiThread(() => progressDialog.SetMessage(@"Не удалось загрузить фото по посещению!"));
+//						Thread.Sleep (1500);
+						break;
+					}
+				}
+			}			
 		}
 
 		void RefreshContent()
 		{
 			llSyncItems.RemoveAllViews ();
+			queue = (List<SyncQueue>)SyncQueueManager.GetSyncQueue (selectedDate);
 			foreach (var q in queue) {
 				View view = SavedInflater.Inflate(Resource.Layout.SyncFragmentItem, null);
 

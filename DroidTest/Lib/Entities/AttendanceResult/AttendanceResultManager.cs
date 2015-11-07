@@ -57,6 +57,11 @@ namespace DroidTest.Lib.Entities
 			);
 		}
 
+		public static bool CorrectAttendanceForSync(int oldAttendance, int newAttendance)
+		{
+			return AttendanceResultRepository.CorrectAttendanceForSync (oldAttendance, newAttendance);
+		}
+
 		public static int DeleteAttendanceResult(int id)
 		{
 			return AttendanceResultRepository.DeleteAttendanceResult(id);

@@ -130,7 +130,7 @@ namespace DroidTest.Lib.Entities
 			if (item.id == 0) {
 				item.id = ++max;
 
-				SyncQueueManager.AddToQueue (item);
+//				SyncQueueManager.AddToQueue (item);
 
 				attendanceResults.Add (item);
 			} else {
@@ -155,10 +155,23 @@ namespace DroidTest.Lib.Entities
 					max = attendanceResults.Max(x => x.id);
 				item.id = ++max;
 
-				SyncQueueManager.AddToQueue (item);
+//				SyncQueueManager.AddToQueue (item);
 
 				attendanceResults.Add (item);
 			}
+			WriteXml ();
+			return true;
+		}
+
+		public static bool CorrectAttendanceForSync(int oldAttendance, int newAttendance)
+		{
+			for (int i = 0; i < attendanceResults.Count; i++) {
+				if (attendanceResults[i].attendance == oldAttendance) {
+					attendanceResults[i].attendance = newAttendance;
+					SyncQueueManager.AddToQueue (attendanceResults[i]);
+				}				
+			}
+				
 			WriteXml ();
 			return true;
 		}

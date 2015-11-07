@@ -107,6 +107,18 @@ namespace DroidTest.Lib.Entities
 			return item.id;
 		}
 
+		public static bool CorrectAfterSync(Attendance oldItem, Attendance newItem)
+		{
+			for (int i = 0; i < attendances.Count; i++) {
+				if (attendances [i].id == oldItem.id) {
+					attendances [i] = newItem;
+					WriteXml ();
+					return true;
+				}
+			}
+			return false;
+		}
+
 		public static int DeleteAttendance (int id)
 		{
 			for (var t = 0; t< attendances.Count; t++) {

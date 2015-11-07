@@ -176,20 +176,20 @@ namespace DroidTest
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f090018
-			public const int Text = 2131296280;
+			// aapt resource value: 0x7f09001a
+			public const int Text = 2131296282;
 			
-			// aapt resource value: 0x7f090061
-			public const int add_attendance = 2131296353;
+			// aapt resource value: 0x7f090063
+			public const int add_attendance = 2131296355;
 			
-			// aapt resource value: 0x7f090062
-			public const int add_photo = 2131296354;
+			// aapt resource value: 0x7f090064
+			public const int add_photo = 2131296356;
 			
-			// aapt resource value: 0x7f090052
-			public const int btnDialogEmail = 2131296338;
+			// aapt resource value: 0x7f090054
+			public const int btnDialogEmail = 2131296340;
 			
-			// aapt resource value: 0x7f09005e
-			public const int checkBox1 = 2131296350;
+			// aapt resource value: 0x7f090060
+			public const int checkBox1 = 2131296352;
 			
 			// aapt resource value: 0x7f090010
 			public const int content_frame = 2131296272;
@@ -233,8 +233,8 @@ namespace DroidTest
 			// aapt resource value: 0x7f090006
 			public const int imageView1 = 2131296262;
 			
-			// aapt resource value: 0x7f09001a
-			public const int largeText = 2131296282;
+			// aapt resource value: 0x7f09001c
+			public const int largeText = 2131296284;
 			
 			// aapt resource value: 0x7f090011
 			public const int left_drawer = 2131296273;
@@ -242,236 +242,242 @@ namespace DroidTest
 			// aapt resource value: 0x7f090002
 			public const int linearLayout1 = 2131296258;
 			
-			// aapt resource value: 0x7f090050
-			public const int llDanger = 2131296336;
+			// aapt resource value: 0x7f090052
+			public const int llDanger = 2131296338;
 			
-			// aapt resource value: 0x7f090049
-			public const int llInfo = 2131296329;
-			
-			// aapt resource value: 0x7f09004c
-			public const int llSuccess = 2131296332;
+			// aapt resource value: 0x7f09004b
+			public const int llInfo = 2131296331;
 			
 			// aapt resource value: 0x7f09004e
-			public const int llWarning = 2131296334;
+			public const int llSuccess = 2131296334;
+			
+			// aapt resource value: 0x7f090050
+			public const int llWarning = 2131296336;
+			
+			// aapt resource value: 0x7f09001d
+			public const int lvMerchantInfo = 2131296285;
 			
 			// aapt resource value: 0x7f09001b
-			public const int lvMerchantInfo = 2131296283;
+			public const int mfContent = 2131296283;
 			
 			// aapt resource value: 0x7f090019
-			public const int mfContent = 2131296281;
+			public const int mfFullContent = 2131296281;
 			
 			// aapt resource value: 0x7f090017
-			public const int mfFullContent = 2131296279;
+			public const int mfHorizontalScrollView = 2131296279;
 			
 			// aapt resource value: 0x7f090015
-			public const int mfHorizontalScrollView = 2131296277;
-			
-			// aapt resource value: 0x7f090014
-			public const int mfRelativeLayout = 2131296276;
+			public const int mfPhotoCountText = 2131296277;
 			
 			// aapt resource value: 0x7f090016
-			public const int mfScrollView = 2131296278;
+			public const int mfRelativeLayout = 2131296278;
+			
+			// aapt resource value: 0x7f090018
+			public const int mfScrollView = 2131296280;
+			
+			// aapt resource value: 0x7f090014
+			public const int mfSelectedPharmacySpinner = 2131296276;
 			
 			// aapt resource value: 0x7f090013
-			public const int mfSelectedPharmacySpinner = 2131296275;
+			public const int mfSelectedPharmacyText = 2131296275;
 			
 			// aapt resource value: 0x7f090012
-			public const int mfSelectedPharmacyText = 2131296274;
-			
-			// aapt resource value: 0x7f090021
-			public const int pdePharmacyAddressEdit = 2131296289;
-			
-			// aapt resource value: 0x7f090020
-			public const int pdePharmacyAdressText = 2131296288;
-			
-			// aapt resource value: 0x7f090025
-			public const int pdePharmacyCancelButton = 2131296293;
-			
-			// aapt resource value: 0x7f09001f
-			public const int pdePharmacyFullNameEdit = 2131296287;
-			
-			// aapt resource value: 0x7f09001e
-			public const int pdePharmacyFullNameText = 2131296286;
-			
-			// aapt resource value: 0x7f090024
-			public const int pdePharmacySaveButton = 2131296292;
+			public const int mfUpPanelRL = 2131296274;
 			
 			// aapt resource value: 0x7f090023
-			public const int pdePharmacySubwayEdit = 2131296291;
+			public const int pdePharmacyAddressEdit = 2131296291;
 			
 			// aapt resource value: 0x7f090022
-			public const int pdePharmacySubwayText = 2131296290;
-			
-			// aapt resource value: 0x7f09002b
-			public const int pfAddPharmacy = 2131296299;
-			
-			// aapt resource value: 0x7f09002a
-			public const int pfContent = 2131296298;
-			
-			// aapt resource value: 0x7f09002c
-			public const int pfFilter = 2131296300;
-			
-			// aapt resource value: 0x7f09002d
-			public const int pfMore = 2131296301;
-			
-			// aapt resource value: 0x7f090029
-			public const int pfPharmacyAddButton = 2131296297;
-			
-			// aapt resource value: 0x7f09002f
-			public const int pfPharmacyTable = 2131296303;
-			
-			// aapt resource value: 0x7f09002e
-			public const int pfPharmacyTableHeader = 2131296302;
-			
-			// aapt resource value: 0x7f090031
-			public const int pfPharmacyTableRow = 2131296305;
-			
-			// aapt resource value: 0x7f090034
-			public const int pfPharmacyTableRowAddress = 2131296308;
-			
-			// aapt resource value: 0x7f090033
-			public const int pfPharmacyTableRowFullName = 2131296307;
-			
-			// aapt resource value: 0x7f090032
-			public const int pfPharmacyTableRowID = 2131296306;
-			
-			// aapt resource value: 0x7f090028
-			public const int pfSearchButton = 2131296296;
+			public const int pdePharmacyAdressText = 2131296290;
 			
 			// aapt resource value: 0x7f090027
-			public const int pfSearchEdit = 2131296295;
+			public const int pdePharmacyCancelButton = 2131296295;
+			
+			// aapt resource value: 0x7f090021
+			public const int pdePharmacyFullNameEdit = 2131296289;
+			
+			// aapt resource value: 0x7f090020
+			public const int pdePharmacyFullNameText = 2131296288;
 			
 			// aapt resource value: 0x7f090026
-			public const int pfSearchText = 2131296294;
+			public const int pdePharmacySaveButton = 2131296294;
 			
-			// aapt resource value: 0x7f09004a
-			public const int progressBar1 = 2131296330;
+			// aapt resource value: 0x7f090025
+			public const int pdePharmacySubwayEdit = 2131296293;
+			
+			// aapt resource value: 0x7f090024
+			public const int pdePharmacySubwayText = 2131296292;
+			
+			// aapt resource value: 0x7f09002d
+			public const int pfAddPharmacy = 2131296301;
+			
+			// aapt resource value: 0x7f09002c
+			public const int pfContent = 2131296300;
+			
+			// aapt resource value: 0x7f09002e
+			public const int pfFilter = 2131296302;
+			
+			// aapt resource value: 0x7f09002f
+			public const int pfMore = 2131296303;
+			
+			// aapt resource value: 0x7f09002b
+			public const int pfPharmacyAddButton = 2131296299;
+			
+			// aapt resource value: 0x7f090031
+			public const int pfPharmacyTable = 2131296305;
+			
+			// aapt resource value: 0x7f090030
+			public const int pfPharmacyTableHeader = 2131296304;
+			
+			// aapt resource value: 0x7f090033
+			public const int pfPharmacyTableRow = 2131296307;
 			
 			// aapt resource value: 0x7f090036
-			public const int rdDangerLayout = 2131296310;
-			
-			// aapt resource value: 0x7f090037
-			public const int rdDangerText = 2131296311;
-			
-			// aapt resource value: 0x7f09003a
-			public const int rdPharmacyPicker = 2131296314;
-			
-			// aapt resource value: 0x7f09003b
-			public const int rdPick = 2131296315;
+			public const int pfPharmacyTableRowAddress = 2131296310;
 			
 			// aapt resource value: 0x7f090035
-			public const int rdSearchPhrase = 2131296309;
+			public const int pfPharmacyTableRowFullName = 2131296309;
+			
+			// aapt resource value: 0x7f090034
+			public const int pfPharmacyTableRowID = 2131296308;
+			
+			// aapt resource value: 0x7f09002a
+			public const int pfSearchButton = 2131296298;
+			
+			// aapt resource value: 0x7f090029
+			public const int pfSearchEdit = 2131296297;
+			
+			// aapt resource value: 0x7f090028
+			public const int pfSearchText = 2131296296;
+			
+			// aapt resource value: 0x7f09004c
+			public const int progressBar1 = 2131296332;
 			
 			// aapt resource value: 0x7f090038
-			public const int rdSuccessLayout = 2131296312;
+			public const int rdDangerLayout = 2131296312;
 			
 			// aapt resource value: 0x7f090039
-			public const int rdSuccessText = 2131296313;
-			
-			// aapt resource value: 0x7f090040
-			public const int rdanCancel = 2131296320;
-			
-			// aapt resource value: 0x7f09003d
-			public const int rdanDate = 2131296317;
+			public const int rdDangerText = 2131296313;
 			
 			// aapt resource value: 0x7f09003c
-			public const int rdanDecrease = 2131296316;
+			public const int rdPharmacyPicker = 2131296316;
 			
-			// aapt resource value: 0x7f09003e
-			public const int rdanIncrease = 2131296318;
+			// aapt resource value: 0x7f09003d
+			public const int rdPick = 2131296317;
 			
-			// aapt resource value: 0x7f09003f
-			public const int rdanSave = 2131296319;
+			// aapt resource value: 0x7f090037
+			public const int rdSearchPhrase = 2131296311;
+			
+			// aapt resource value: 0x7f09003a
+			public const int rdSuccessLayout = 2131296314;
+			
+			// aapt resource value: 0x7f09003b
+			public const int rdSuccessText = 2131296315;
 			
 			// aapt resource value: 0x7f090042
-			public const int rfAddPharmacy = 2131296322;
+			public const int rdanCancel = 2131296322;
 			
-			// aapt resource value: 0x7f090046
-			public const int rfContent = 2131296326;
+			// aapt resource value: 0x7f09003f
+			public const int rdanDate = 2131296319;
 			
-			// aapt resource value: 0x7f090045
-			public const int rfDatePicker = 2131296325;
+			// aapt resource value: 0x7f09003e
+			public const int rdanDecrease = 2131296318;
 			
-			// aapt resource value: 0x7f090043
-			public const int rfFilter = 2131296323;
+			// aapt resource value: 0x7f090040
+			public const int rdanIncrease = 2131296320;
 			
 			// aapt resource value: 0x7f090041
-			public const int rfMain = 2131296321;
+			public const int rdanSave = 2131296321;
 			
 			// aapt resource value: 0x7f090044
-			public const int rfMore = 2131296324;
+			public const int rfAddPharmacy = 2131296324;
+			
+			// aapt resource value: 0x7f090048
+			public const int rfContent = 2131296328;
+			
+			// aapt resource value: 0x7f090047
+			public const int rfDatePicker = 2131296327;
+			
+			// aapt resource value: 0x7f090045
+			public const int rfFilter = 2131296325;
+			
+			// aapt resource value: 0x7f090043
+			public const int rfMain = 2131296323;
+			
+			// aapt resource value: 0x7f090046
+			public const int rfMore = 2131296326;
 			
 			// aapt resource value: 0x7f09000d
 			public const int scrollView1 = 2131296269;
 			
+			// aapt resource value: 0x7f090058
+			public const int sfList = 2131296344;
+			
 			// aapt resource value: 0x7f090056
-			public const int sfList = 2131296342;
-			
-			// aapt resource value: 0x7f090054
-			public const int sfSelectedDateSpinner = 2131296340;
-			
-			// aapt resource value: 0x7f090053
-			public const int sfSelectedDateText = 2131296339;
+			public const int sfSelectedDateSpinner = 2131296342;
 			
 			// aapt resource value: 0x7f090055
-			public const int sfSyncImage = 2131296341;
-			
-			// aapt resource value: 0x7f09005b
-			public const int sfiDelimiterView = 2131296347;
-			
-			// aapt resource value: 0x7f090059
-			public const int sfiLocationText = 2131296345;
+			public const int sfSelectedDateText = 2131296341;
 			
 			// aapt resource value: 0x7f090057
-			public const int sfiRelativeLayout = 2131296343;
-			
-			// aapt resource value: 0x7f09005a
-			public const int sfiStatusImage = 2131296346;
-			
-			// aapt resource value: 0x7f090058
-			public const int sfiTypeInfoText = 2131296344;
-			
-			// aapt resource value: 0x7f090051
-			public const int sidProgressDanger = 2131296337;
-			
-			// aapt resource value: 0x7f09004b
-			public const int sidProgressInfo = 2131296331;
-			
-			// aapt resource value: 0x7f09004d
-			public const int sidProgressSuccess = 2131296333;
-			
-			// aapt resource value: 0x7f09004f
-			public const int sidProgressWarning = 2131296335;
-			
-			// aapt resource value: 0x7f09005c
-			public const int tableLayout1 = 2131296348;
+			public const int sfSyncImage = 2131296343;
 			
 			// aapt resource value: 0x7f09005d
-			public const int tableRow1 = 2131296349;
+			public const int sfiDelimiterView = 2131296349;
+			
+			// aapt resource value: 0x7f09005b
+			public const int sfiLocationText = 2131296347;
+			
+			// aapt resource value: 0x7f090059
+			public const int sfiRelativeLayout = 2131296345;
+			
+			// aapt resource value: 0x7f09005c
+			public const int sfiStatusImage = 2131296348;
+			
+			// aapt resource value: 0x7f09005a
+			public const int sfiTypeInfoText = 2131296346;
+			
+			// aapt resource value: 0x7f090053
+			public const int sidProgressDanger = 2131296339;
+			
+			// aapt resource value: 0x7f09004d
+			public const int sidProgressInfo = 2131296333;
+			
+			// aapt resource value: 0x7f09004f
+			public const int sidProgressSuccess = 2131296335;
+			
+			// aapt resource value: 0x7f090051
+			public const int sidProgressWarning = 2131296337;
+			
+			// aapt resource value: 0x7f09005e
+			public const int tableLayout1 = 2131296350;
+			
+			// aapt resource value: 0x7f09005f
+			public const int tableRow1 = 2131296351;
 			
 			// aapt resource value: 0x7f090005
 			public const int text = 2131296261;
 			
-			// aapt resource value: 0x7f090030
-			public const int textView1 = 2131296304;
+			// aapt resource value: 0x7f090032
+			public const int textView1 = 2131296306;
 			
-			// aapt resource value: 0x7f09005f
-			public const int textView14 = 2131296351;
+			// aapt resource value: 0x7f090061
+			public const int textView14 = 2131296353;
 			
-			// aapt resource value: 0x7f090060
-			public const int textView17 = 2131296352;
+			// aapt resource value: 0x7f090062
+			public const int textView17 = 2131296354;
 			
-			// aapt resource value: 0x7f09001c
-			public const int textView2 = 2131296284;
+			// aapt resource value: 0x7f09001e
+			public const int textView2 = 2131296286;
 			
-			// aapt resource value: 0x7f09001d
-			public const int textView3 = 2131296285;
+			// aapt resource value: 0x7f09001f
+			public const int textView3 = 2131296287;
 			
-			// aapt resource value: 0x7f090048
-			public const int txtPassword = 2131296328;
+			// aapt resource value: 0x7f09004a
+			public const int txtPassword = 2131296330;
 			
-			// aapt resource value: 0x7f090047
-			public const int txtUsername = 2131296327;
+			// aapt resource value: 0x7f090049
+			public const int txtUsername = 2131296329;
 			
 			static Id()
 			{
@@ -571,6 +577,15 @@ namespace DroidTest
 		
 		public partial class String
 		{
+			
+			// aapt resource value: 0x7f050006
+			public const int IDattendance = 2131034118;
+			
+			// aapt resource value: 0x7f050007
+			public const int IDdrug = 2131034119;
+			
+			// aapt resource value: 0x7f050008
+			public const int IDinfo = 2131034120;
 			
 			// aapt resource value: 0x7f050004
 			public const int action_websearch = 2131034116;

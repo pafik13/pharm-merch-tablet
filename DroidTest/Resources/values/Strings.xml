@@ -16,4 +16,9 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
+
+    <string name="IDattendance">ID посещения - используется в MainFragment</string>
+    <string name="IDdrug">ID препарата - используется в MainFragment</string>
+    <string name="IDinfo">ID информации - используется в MainFragment</string>
+
 </resources>
